@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Technical Notes - Vaibhavi Agarwal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!-- Background canvases (binary rain and graphs) -->
+<canvas id="binary-canvas"></canvas>
+<canvas id="graph-canvas"></canvas>
+
+<div class="redirect-overlay" aria-live="polite">Opening...</div>
+
+<!-- Subtle textual overlay for binary/math content -->
+<div class="math-overlay" aria-hidden="true"></div>
+<nav>
+    <h2 class="logo">Vaibhavi Agarwal</h2>
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="notes.html">Technical Notes</a></li>
+        <li><a href="blog.html">Blog</a></li>
+    </ul>
+    <div class="social">
+        <a id="github-link" class="external-transition" href="https://github.com/vaibhaviagarwal" aria-label="GitHub" title="GitHub">
+            <svg width="18" height="18" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82A7.6 7.6 0 018 4.6c.68.003 1.36.092 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.19 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+            </svg>
+        </a>
+
+        <a id="linkedin-link" class="external-transition" href="https://linkedin.com/in/vaibhavi-agarwal-28b6481b3" aria-label="LinkedIn" title="LinkedIn">
+            <svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4.98 3.5C4.98 4.88 3.88 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8h4v14h-4V8zm7.5 0h3.8v2h.1c.5-.9 1.8-1.8 3.7-1.8 4 0 4.8 2.5 4.8 5.8V22H18v-6.2c0-1.5 0-3.5-2.2-3.5-2.3 0-2.6 1.7-2.6 3.4V22H8V8z"/>
+            </svg>
+        </a>
+
+        <a id="email-link" href="mailto:vagarwal2077@gmail.com" aria-label="Email" title="Email">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2 6.5A2.5 2.5 0 014.5 4h15A2.5 2.5 0 0122 6.5v11A2.5 2.5 0 0119.5 20h-15A2.5 2.5 0 012 18.5v-12zM4.5 6L12 11l7.5-5" stroke-width="0"/>
+                <path d="M3 7.2v10.3c0 .99.8 1.5 1.5 1.5h15c.7 0 1.5-.5 1.5-1.5V7.2l-9 6-9-6z"/>
+            </svg>
+        </a>
+    </div>
+</nav>
+
+<section class="page-hero scroll-fade">
+    <h1>Technical Notes</h1>
+    <p>Architecture breakdowns and deep technical insights.</p>
+</section>
+
+<section class="page-content scroll-fade">
+    <div class="note-item">
+        <h3>Note Title</h3>
+        <p>Write your technical notes and insights here.</p>
+    </div>
+
+    <div class="note-item">
+        <h3>Another Note</h3>
+        <p>Add deep dives into systems, algorithms, or design patterns.</p>
+    </div>
+</section>
+
+<script>
+(() => {
+    const binaryCanvas = document.getElementById('binary-canvas');
+    const graphCanvas = document.getElementById('graph-canvas');
+    const overlay = document.querySelector('.math-overlay');
+
+    let dpr = window.devicePixelRatio || 1;
+    function resize() {
+        dpr = window.devicePixelRatio || 1;
+        const cssW = document.documentElement.clientWidth || window.innerWidth;
+        const cssH = document.documentElement.clientHeight || window.innerHeight;
+        binaryCanvas.width = Math.floor(cssW * dpr);
+        binaryCanvas.height = Math.floor(cssH * dpr);
+        graphCanvas.width = Math.floor(cssW * dpr);
+        graphCanvas.height = Math.floor(cssH * dpr);
+        binaryCanvas.style.width = cssW + 'px';
+        binaryCanvas.style.height = cssH + 'px';
+        graphCanvas.style.width = cssW + 'px';
+        graphCanvas.style.height = cssH + 'px';
+        bCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        gCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        initColumns();
+    }
+
+    window.addEventListener('resize', resize);
+
+    const bCtx = binaryCanvas.getContext('2d');
+    const chars = ['0','1'];
+    const blue = '102,204,255';
+    const blue2 = '60,160,255';
+    let columns = [];
+    let fontSize = 14;
+
+    function initColumns() {
+        fontSize = Math.max(10, Math.floor(window.innerWidth / 220));
+        const cssW = binaryCanvas.width / dpr;
+        const cssH = binaryCanvas.height / dpr;
+        const cols = Math.ceil(cssW / fontSize) + 2;
+        columns = new Array(cols).fill(0).map(() => ({y: Math.random() * cssH}));
+        bCtx.font = fontSize + 'px monospace';
+    }
+
+    function drawBinary() {
+        const cssW = binaryCanvas.width / dpr;
+        const cssH = binaryCanvas.height / dpr;
+        bCtx.clearRect(0,0,cssW,cssH);
+        bCtx.fillStyle = 'rgba(2,6,23,0.12)';
+        bCtx.fillRect(0,0,cssW,cssH);
+
+        for (let i = 0; i < columns.length; i++) {
+            const x = i * fontSize;
+            const col = columns[i];
+            const text = chars[Math.floor(Math.random() * chars.length)];
+            bCtx.shadowColor = Math.random() > 0.6 ? `rgba(${blue},0.7)` : `rgba(${blue2},0.7)`;
+            bCtx.shadowBlur = 2 + Math.random()*3;
+            bCtx.fillStyle = Math.random() > 0.6 ? `rgba(${blue},0.68)` : `rgba(${blue2},0.68)`;
+            bCtx.fillText(text, x, col.y);
+
+            col.y += fontSize * 0.45 + Math.random() * 1;
+            const cssH2 = binaryCanvas.height / dpr;
+            if (col.y > cssH2 + Math.random() * 300) {
+                col.y = -10 - Math.random() * 60;
+            }
+        }
+    }
+
+    const gCtx = graphCanvas.getContext('2d');
+    let t = 0;
+
+    function drawGraphs() {
+        const cssW = graphCanvas.width / dpr;
+        const cssH = graphCanvas.height / dpr;
+        gCtx.clearRect(0,0,cssW,cssH);
+
+        gCtx.strokeStyle = `rgba(${blue},0.03)`;
+        gCtx.lineWidth = 1;
+        const gridSize = 40;
+        gCtx.beginPath();
+        for (let x = 0; x < cssW; x += gridSize) {
+            gCtx.moveTo(x + 0.5, 0);
+            gCtx.lineTo(x + 0.5, cssH);
+        }
+        for (let y = 0; y < cssH; y += gridSize) {
+            gCtx.moveTo(0, y + 0.5);
+            gCtx.lineTo(cssW, y + 0.5);
+        }
+        gCtx.stroke();
+
+        gCtx.beginPath();
+        const amplitude = Math.min(80, cssH * 0.08);
+        const centerY = cssH * 0.45;
+        for (let px = 0; px <= cssW; px += 8) {
+            const phase = (px * 0.008) + t * 0.06;
+            const y = centerY + Math.sin(phase) * amplitude * (0.6 + 0.4 * Math.cos(px * 0.002));
+            if (px === 0) gCtx.moveTo(px, y);
+            else gCtx.lineTo(px, y);
+        }
+        gCtx.strokeStyle = `rgba(${blue},0.16)`;
+        gCtx.lineWidth = 2;
+        gCtx.shadowColor = `rgba(${blue},0.06)`;
+        gCtx.shadowBlur = 6;
+        gCtx.stroke();
+    }
+
+    function populateOverlay() {
+        overlay.textContent = '';
+    }
+
+    function loop() {
+        t += 0.006;
+        drawBinary();
+        drawGraphs();
+        requestAnimationFrame(loop);
+    }
+
+    function setupScrollAnimations() {
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-fade, .scroll-slide').forEach(el => {
+            observer.observe(el);
+        });
+    }
+
+    function setupPageTransitions() {
+        document.body.classList.add('is-loaded');
+
+        document.addEventListener('click', (event) => {
+            const link = event.target.closest('a');
+            if (!link) return;
+
+            const href = link.getAttribute('href');
+            if (!href || href.startsWith('#') || href.startsWith('mailto:') || link.target === '_blank') {
+                return;
+            }
+
+            if (link.origin === window.location.origin || link.classList.contains('external-transition')) {
+                event.preventDefault();
+                document.body.classList.add('is-exiting');
+                setTimeout(() => {
+                    window.location.href = link.href;
+                }, 220);
+            }
+        });
+    }
+
+    resize();
+    populateOverlay();
+    setupScrollAnimations();
+    setupPageTransitions();
+})();
+</script>
+
+</body>
+</html>
