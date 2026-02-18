@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Technical Notes - Vaibhavi Agarwal</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -197,8 +198,6 @@
     }
 
     function setupPageTransitions() {
-        document.body.classList.add('is-loaded');
-
         document.addEventListener('click', (event) => {
             const link = event.target.closest('a');
             if (!link) return;
@@ -208,7 +207,7 @@
                 return;
             }
 
-            if (link.origin === window.location.origin || link.classList.contains('external-transition')) {
+            if (link.classList.contains('external-transition')) {
                 event.preventDefault();
                 document.body.classList.add('is-exiting');
                 setTimeout(() => {

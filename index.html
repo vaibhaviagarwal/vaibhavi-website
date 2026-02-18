@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Vaibhavi Agarwal</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -70,7 +71,12 @@
 <section class="about" id="about">
     <div class="about-content">
         <h2>About Me</h2>
-        <p>I'm a Mathematics student at University of Waterloo exploring probability theory, data science, and quantitative finance. I'm passionate about solving complex problems, building predictive models, and understanding the mathematical principles behind markets and systems. Outside of academics, I enjoy learning new technologies, collaborating on projects, and exploring how theory translates into real-world applications.</p>
+        <p class="about-body">I am a first year Honours Mathematics student at the University of Waterloo drawn to problems that begin messy and demand precision. Data science and machine learning interest me because they connect mathematical thinking to real world systems and force clarity in the face of noise.</p>
+        <p class="about-body">I have been coding since Grade 6, starting with Scratch and continuing consistently through high school. What began as curiosity became a way of thinking. I build projects both in school and independently because I enjoy designing systems that are logical, efficient, and intentional. You can explore some of my work to see that mindset in action.</p>
+        <p class="about-body">That same focus on clarity shapes how I approach ideas beyond code. Through Ethics Bowl, I learned to engage with complex issues thoughtfully, consider opposing perspectives, and reason through ambiguity. It strengthened my commitment to fairness, openness, and integrity, values I carry into every team I join.</p>
+        <p class="about-body">I am competitive and strategy driven. I played badminton in high school and served as an assistant coach at a volunteer-run, low-cost club built to keep the sport accessible. I mentored younger players and managed volunteers. I am also a regular at poker club, drawn to the probability, discipline, and pattern recognition the game demands.</p>
+        <p class="about-body">Moving from India to Canada pushed me to adapt quickly and communicate across different environments. As a tutor and Editor in Chief of Yearbook, I learned how to bring clarity and cohesion to collaborative teams.</p>
+        <p class="about-body">Whether in code, competition, or conversation, I look for the system beneath the surface and work to make complexity manageable.</p>
     </div>
 </section>
 
@@ -276,8 +282,6 @@
     }
 
     function setupPageTransitions() {
-        document.body.classList.add('is-loaded');
-
         document.addEventListener('click', (event) => {
             const link = event.target.closest('a');
             if (!link) return;
@@ -287,7 +291,7 @@
                 return;
             }
 
-            if (link.origin === window.location.origin || link.classList.contains('external-transition')) {
+            if (link.classList.contains('external-transition')) {
                 event.preventDefault();
                 document.body.classList.add('is-exiting');
                 setTimeout(() => {
