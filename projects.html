@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects - Vaibhavi Agarwal</title>
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="style.css">
@@ -19,7 +20,7 @@
     <h2 class="logo">Vaibhavi Agarwal</h2>
     <ul>
         <li><a href="index.html">Home</a></li>
-        <li><a href="projects.html">Projects</a></li>
+        <li><a href="projects.html" class="active" aria-current="page">Projects</a></li>
         <li><a href="notes.html">Technical Notes</a></li>
         <li><a href="blog.html">Blog</a></li>
     </ul>
@@ -52,13 +53,8 @@
 
 <section class="page-content scroll-fade">
     <div class="project-item">
-        <h3>Project Title</h3>
-        <p>Description of your project, technologies used, and what you built.</p>
-    </div>
-
-    <div class="project-item">
-        <h3>Another Project</h3>
-        <p>Add your projects here with links and descriptions.</p>
+        <h3>Coming Soon</h3>
+        <p>Projects are on the way.</p>
     </div>
 </section>
 
@@ -96,7 +92,7 @@
     let fontSize = 14;
 
     function initColumns() {
-        fontSize = Math.max(10, Math.floor(window.innerWidth / 220));
+        fontSize = Math.max(16, Math.floor(window.innerWidth / 110));
         const cssW = binaryCanvas.width / dpr;
         const cssH = binaryCanvas.height / dpr;
         const cols = Math.ceil(cssW / fontSize) + 2;

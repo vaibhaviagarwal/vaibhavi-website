@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Technical Notes - Vaibhavi Agarwal</title>
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="style.css">
@@ -20,7 +21,7 @@
     <ul>
         <li><a href="index.html">Home</a></li>
         <li><a href="projects.html">Projects</a></li>
-        <li><a href="notes.html">Technical Notes</a></li>
+        <li><a href="notes.html" class="active" aria-current="page">Technical Notes</a></li>
         <li><a href="blog.html">Blog</a></li>
     </ul>
     <div class="social">
@@ -52,13 +53,8 @@
 
 <section class="page-content scroll-fade">
     <div class="note-item">
-        <h3>Note Title</h3>
-        <p>Write your technical notes and insights here.</p>
-    </div>
-
-    <div class="note-item">
-        <h3>Another Note</h3>
-        <p>Add deep dives into systems, algorithms, or design patterns.</p>
+        <h3>Coming Soon</h3>
+        <p>Technical notes are coming soon.</p>
     </div>
 </section>
 
@@ -96,7 +92,7 @@
     let fontSize = 14;
 
     function initColumns() {
-        fontSize = Math.max(10, Math.floor(window.innerWidth / 220));
+        fontSize = Math.max(16, Math.floor(window.innerWidth / 110));
         const cssW = binaryCanvas.width / dpr;
         const cssH = binaryCanvas.height / dpr;
         const cols = Math.ceil(cssW / fontSize) + 2;

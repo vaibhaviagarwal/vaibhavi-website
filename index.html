@@ -9,6 +9,7 @@
   }
 </script>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vaibhavi Agarwal</title>
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="style.css">
@@ -25,7 +26,7 @@
 <nav>
     <h2 class="logo"><span id="typing-name"></span><span class="cursor"></span></h2>
     <ul>
-        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html" class="active" aria-current="page">Home</a></li>
         <li><a href="projects.html">Projects</a></li>
         <li><a href="notes.html">Technical Notes</a></li>
         <li><a href="blog.html">Blog</a></li>
@@ -85,6 +86,39 @@
         <p class="about-body">Moving from India to Canada pushed me to adapt quickly and communicate across different environments. As a tutor and Editor in Chief of Yearbook, I learned how to bring clarity and cohesion to collaborative teams.</p>
         <p class="about-body">Whether in code, competition, or conversation, I look for the system beneath the surface and work to make complexity manageable.</p>
     </div>
+
+    <div class="sticker-cloud" aria-label="About me stickers">
+        <span class="sticker sticker-matcha" role="img" aria-label="Matcha">
+            <img src="matcha.jpg" alt="" class="sticker-img" aria-hidden="true">
+        </span>
+        <span class="sticker sticker-paint" role="img" aria-label="Painting">
+            <img src="painting.jpg" alt="" class="sticker-img" aria-hidden="true">
+        </span>
+        <span class="sticker sticker-badminton" role="img" aria-label="Badminton">
+            <img src="badminton.jpg" alt="" class="sticker-img" aria-hidden="true">
+        </span>
+        <span class="sticker sticker-cat" role="img" aria-label="Cat">
+            <img src="cat.jpg" alt="" class="sticker-img" aria-hidden="true">
+        </span>
+        <span class="sticker sticker-food" role="img" aria-label="Asian food">
+            <img src="rasgulla.jpg" alt="" class="sticker-img" aria-hidden="true">
+        </span>
+        <span class="sticker sticker-roots" role="img" aria-label="Indian Bengali">
+            <img src="indianflag.jpg" alt="" class="sticker-img" aria-hidden="true">
+        </span>
+        <span class="sticker sticker-hindu" role="img" aria-label="Hindu">
+            <img src="hindu.png" alt="" class="sticker-img" aria-hidden="true">
+        </span>
+        <span class="sticker sticker-photo" role="img" aria-label="Photography">
+            <img src="photography.png" alt="" class="sticker-img" aria-hidden="true">
+        </span>
+        <span class="sticker sticker-hiking" role="img" aria-label="Hiking">
+            <img src="ilovehking.jpg" alt="" class="sticker-img" aria-hidden="true">
+        </span>
+        <span class="sticker sticker-giraffe" role="img" aria-label="Giraffe">
+            <img src="giraffe.jpg" alt="" class="sticker-img" aria-hidden="true">
+        </span>
+    </div>
 </section>
 
 <script>
@@ -129,7 +163,7 @@
 
     function initColumns() {
         // choose a smaller font size so there are enough columns to cover wide screens
-        fontSize = Math.max(10, Math.floor(window.innerWidth / 220));
+        fontSize = Math.max(16, Math.floor(window.innerWidth / 110));
         const cssW = binaryCanvas.width / dpr;
         const cssH = binaryCanvas.height / dpr;
         const cols = Math.ceil(cssW / fontSize) + 2; // slight extra to avoid gaps at edges

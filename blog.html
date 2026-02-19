@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog - Vaibhavi Agarwal</title>
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="style.css">
@@ -21,7 +22,7 @@
         <li><a href="index.html">Home</a></li>
         <li><a href="projects.html">Projects</a></li>
         <li><a href="notes.html">Technical Notes</a></li>
-        <li><a href="blog.html">Blog</a></li>
+        <li><a href="blog.html" class="active" aria-current="page">Blog</a></li>
     </ul>
     <div class="social">
         <a id="github-link" class="external-transition" href="https://github.com/vaibhaviagarwal" aria-label="GitHub" title="GitHub">
@@ -47,18 +48,13 @@
 
 <section class="page-hero scroll-fade">
     <h1>Blog</h1>
-    <p>Reflections on learning and system design.</p>
+    <p>A glimpse into my life and reflections.</p>
 </section>
 
 <section class="page-content scroll-fade">
     <div class="blog-item">
-        <h3>Blog Post Title</h3>
-        <p>Share your thoughts, learnings, and reflections here.</p>
-    </div>
-
-    <div class="blog-item">
-        <h3>Another Blog Post</h3>
-        <p>Write about topics you're passionate about.</p>
+        <h3>Coming Soon</h3>
+        <p>Blog posts are coming soon.</p>
     </div>
 </section>
 
@@ -96,7 +92,7 @@
     let fontSize = 14;
 
     function initColumns() {
-        fontSize = Math.max(10, Math.floor(window.innerWidth / 220));
+        fontSize = Math.max(16, Math.floor(window.innerWidth / 110));
         const cssW = binaryCanvas.width / dpr;
         const cssH = binaryCanvas.height / dpr;
         const cols = Math.ceil(cssW / fontSize) + 2;
