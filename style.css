@@ -411,6 +411,113 @@ body.modal-open {
     background: rgba(var(--neon-1), 0.8);
 }
 
+.project-slideshow {
+    position: relative;
+    min-height: 220px;
+}
+
+.project-slide {
+    display: none;
+}
+
+.project-slide.active {
+    display: block;
+}
+
+.project-media {
+    margin-top: 14px;
+}
+
+.project-media video {
+    width: 100%;
+    border-radius: 12px;
+    border: 1px solid var(--stroke);
+    background: rgba(255, 255, 255, 0.82);
+}
+
+.project-media-fallback {
+    margin-top: 8px;
+    font-size: 14px;
+}
+
+.project-media-fallback a {
+    color: #245a84;
+    text-decoration: none;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.project-media-fallback a:hover {
+    text-decoration: underline;
+}
+
+.project-description {
+    margin-top: 14px;
+    border: 1px solid var(--stroke);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.7);
+    padding: 10px 14px;
+}
+
+.project-description summary {
+    cursor: pointer;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #245a84;
+}
+
+.project-description p {
+    margin-top: 8px;
+}
+
+.project-controls {
+    margin-top: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.project-nav {
+    min-width: 74px;
+    border-radius: 999px;
+    border: 1px solid var(--stroke);
+    background: rgba(255, 255, 255, 0.82);
+    color: #245a84;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+.project-dots {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex: 1;
+}
+
+.project-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 999px;
+    border: 1px solid rgba(var(--neon-1), 0.65);
+    background: rgba(255, 255, 255, 0.82);
+    cursor: pointer;
+    padding: 0;
+}
+
+.project-dot.active {
+    background: rgba(var(--neon-1), 0.8);
+}
+
 .project-item,
 .note-item,
 .blog-item {

@@ -52,9 +52,36 @@
 </section>
 
 <section class="page-content scroll-fade">
-    <div class="project-item">
-        <h3>Coming Soon</h3>
-        <p>Projects are on the way.</p>
+    <div class="project-slideshow" aria-label="Projects slideshow">
+        <article class="project-slide active" data-project-slide>
+            <div class="project-item">
+                <h3>Waterloo Course Finder</h3>
+                <div class="project-media">
+                    <video controls preload="metadata" playsinline webkit-playsinline src="finder-demo.mp4">
+                        <source src="finder-demo.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <p class="project-media-fallback"><a href="finder-demo.mp4" target="_blank" rel="noopener">Open demo video</a></p>
+                </div>
+                <details class="project-description">
+                    <summary>Read Description</summary>
+                    <p>Waterloo Course Finder is a Java desktop application that helps students quickly look up University of Waterloo courses by course code (for example, CS136). The app uses a Swing-based interface and loads course data from a JSON dataset, then displays key details such as subject, number, title, prerequisites, corequisites, and antirequisites. It includes a refresh feature to reload updated course data without restarting the app. The project is built with Maven, targets Java 17, and uses Gson for JSON parsing, making it a lightweight and practical tool for fast academic course discovery.</p>
+                </details>
+            </div>
+        </article>
+
+        <article class="project-slide" data-project-slide>
+            <div class="project-item">
+                <h3>Coming Soon</h3>
+                <p>Projects are on the way.</p>
+            </div>
+        </article>
+    </div>
+
+    <div class="project-controls" aria-label="Project slideshow controls">
+        <button class="project-nav" type="button" data-project-prev>Prev</button>
+        <div class="project-dots" data-project-dots aria-label="Project slide indicators"></div>
+        <button class="project-nav" type="button" data-project-next>Next</button>
     </div>
 </section>
 
@@ -193,6 +220,40 @@
         });
     }
 
+    function setupProjectSlideshow() {
+        const slides = Array.from(document.querySelectorAll('[data-project-slide]'));
+        const prevBtn = document.querySelector('[data-project-prev]');
+        const nextBtn = document.querySelector('[data-project-next]');
+        const dotsWrap = document.querySelector('[data-project-dots]');
+
+        if (!slides.length || !prevBtn || !nextBtn || !dotsWrap) return;
+
+        let currentIndex = 0;
+        const dots = slides.map((_, index) => {
+            const dot = document.createElement('button');
+            dot.type = 'button';
+            dot.className = 'project-dot';
+            dot.setAttribute('aria-label', `Go to project ${index + 1}`);
+            dot.addEventListener('click', () => setSlide(index));
+            dotsWrap.appendChild(dot);
+            return dot;
+        });
+
+        function setSlide(index) {
+            currentIndex = (index + slides.length) % slides.length;
+            slides.forEach((slide, slideIndex) => {
+                slide.classList.toggle('active', slideIndex === currentIndex);
+            });
+            dots.forEach((dot, dotIndex) => {
+                dot.classList.toggle('active', dotIndex === currentIndex);
+            });
+        }
+
+        prevBtn.addEventListener('click', () => setSlide(currentIndex - 1));
+        nextBtn.addEventListener('click', () => setSlide(currentIndex + 1));
+        setSlide(0);
+    }
+
     function setupPageTransitions() {
         document.addEventListener('click', (event) => {
             const link = event.target.closest('a');
@@ -216,6 +277,7 @@
     resize();
     populateOverlay();
     setupScrollAnimations();
+    setupProjectSlideshow();
     setupPageTransitions();
 })();
 </script>
