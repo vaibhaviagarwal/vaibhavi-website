@@ -52,11 +52,26 @@
 </section>
 
 <section class="page-content scroll-fade">
-    <div class="blog-item">
-        <h3>Coming Soon</h3>
-        <p>Blog posts are coming soon.</p>
+    <div class="blog-categories">
+        <button class="category-button category-trigger" type="button" data-category="art">Art</button>
+        <button class="category-button category-trigger" type="button" data-category="reflections">Reflections</button>
+        <button class="category-button category-trigger" type="button" data-category="poker">Poker</button>
     </div>
 </section>
+
+<div class="blog-modal" id="blog-modal" aria-hidden="true">
+    <div class="blog-modal-backdrop" data-close="true"></div>
+    <div class="blog-modal-content" role="dialog" aria-modal="true" aria-labelledby="blog-modal-title">
+        <button class="blog-modal-close" id="blog-modal-close" type="button" aria-label="Close slideshow">×</button>
+        <h2 id="blog-modal-title">Coming soon</h2>
+        <div class="blog-slideshow" id="blog-slideshow"></div>
+        <div class="blog-controls">
+            <button class="blog-nav" id="blog-prev" type="button" aria-label="Previous slide">Prev</button>
+            <div class="blog-dots" id="blog-dots" aria-label="Slide navigation"></div>
+            <button class="blog-nav" id="blog-next" type="button" aria-label="Next slide">Next</button>
+        </div>
+    </div>
+</div>
 
 <script>
 (() => {
@@ -213,10 +228,113 @@
         });
     }
 
+    function setupBlogModal() {
+        const modal = document.getElementById('blog-modal');
+        const modalTitle = document.getElementById('blog-modal-title');
+        const slideshow = document.getElementById('blog-slideshow');
+        const dotsWrap = document.getElementById('blog-dots');
+        const prevBtn = document.getElementById('blog-prev');
+        const nextBtn = document.getElementById('blog-next');
+        const closeBtn = document.getElementById('blog-modal-close');
+        const triggers = document.querySelectorAll('.category-trigger');
+
+        const slidesByCategory = {
+            art: [
+                'Art stories coming soon',
+                'Sketchbook moments coming soon',
+                'New paintings coming soon'
+            ],
+            reflections: [
+                'Personal reflections coming soon',
+                'Life lessons coming soon',
+                'Thought pieces coming soon'
+            ],
+            poker: [
+                'Poker notes coming soon',
+                'Hand breakdowns coming soon',
+                'Strategy posts coming soon'
+            ]
+        };
+
+        let currentSlides = [];
+        let currentIndex = 0;
+
+        function renderSlides() {
+            slideshow.innerHTML = '';
+            dotsWrap.innerHTML = '';
+
+            currentSlides.forEach((text, index) => {
+                const slide = document.createElement('div');
+                slide.className = 'blog-slide';
+                if (index === currentIndex) slide.classList.add('active');
+                slide.textContent = text;
+                slideshow.appendChild(slide);
+
+                const dot = document.createElement('button');
+                dot.type = 'button';
+                dot.className = 'blog-dot';
+                if (index === currentIndex) dot.classList.add('active');
+                dot.setAttribute('aria-label', `Go to slide ${index + 1}`);
+                dot.addEventListener('click', () => {
+                    currentIndex = index;
+                    renderSlides();
+                });
+                dotsWrap.appendChild(dot);
+            });
+        }
+
+        function openModal(category) {
+            const label = category.charAt(0).toUpperCase() + category.slice(1);
+            modalTitle.textContent = `${label} — Coming soon`;
+            currentSlides = slidesByCategory[category] || ['Coming soon'];
+            currentIndex = 0;
+            renderSlides();
+            modal.classList.add('open');
+            modal.setAttribute('aria-hidden', 'false');
+            document.body.classList.add('modal-open');
+        }
+
+        function closeModal() {
+            modal.classList.remove('open');
+            modal.setAttribute('aria-hidden', 'true');
+            document.body.classList.remove('modal-open');
+        }
+
+        function moveSlide(step) {
+            if (!currentSlides.length) return;
+            currentIndex = (currentIndex + step + currentSlides.length) % currentSlides.length;
+            renderSlides();
+        }
+
+        triggers.forEach((trigger) => {
+            trigger.addEventListener('click', () => {
+                openModal(trigger.dataset.category || 'art');
+            });
+        });
+
+        prevBtn.addEventListener('click', () => moveSlide(-1));
+        nextBtn.addEventListener('click', () => moveSlide(1));
+        closeBtn.addEventListener('click', closeModal);
+
+        modal.addEventListener('click', (event) => {
+            if (event.target.matches('[data-close="true"]')) {
+                closeModal();
+            }
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (!modal.classList.contains('open')) return;
+            if (event.key === 'Escape') closeModal();
+            if (event.key === 'ArrowRight') moveSlide(1);
+            if (event.key === 'ArrowLeft') moveSlide(-1);
+        });
+    }
+
     resize();
     populateOverlay();
     setupScrollAnimations();
     setupPageTransitions();
+    setupBlogModal();
 })();
 </script>
 
