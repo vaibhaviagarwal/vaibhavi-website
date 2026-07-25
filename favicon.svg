@@ -1,14 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
-  <!-- VA mark -->
-  <g fill="none" stroke="#0b0f19" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
-    <!-- V left stroke -->
-    <path d="M6 14 L24 52"/>
-    <!-- Shared middle stroke (V right / A left) -->
-    <path d="M24 52 L42 14"/>
-    <!-- A right stroke -->
-    <path d="M42 14 L60 52"/>
-    <!-- A crossbar -->
-    <path d="M30 36 H48"/>
-  </g>
-
+  <rect width="64" height="64" rx="12" fill="#0b1413"/>
+  <text x="20" y="31" font-family="Georgia, 'Times New Roman', serif" font-size="27" fill="#f2efe6" text-anchor="middle">Q</text>
+  <text x="44" y="53" font-family="Georgia, 'Times New Roman', serif" font-size="27" fill="#5dcaa5" text-anchor="middle">4</text>
 </svg>

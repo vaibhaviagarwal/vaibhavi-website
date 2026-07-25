@@ -1,355 +1,741 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script>
-  if (window.location.pathname.endsWith("index.html")) {
-    window.location.replace(
-      window.location.pathname.replace("index.html", "")
-    );
-  }
-</script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vaibhavi Agarwal</title>
-    <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vaibhavi Agarwal</title>
+<meta name="description" content="Vaibhavi Agarwal — honours mathematics (co-op) at the University of Waterloo. Research assistant at TUHH Hamburg. Full-stack, data pipelines, applied probability.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-<!-- Background canvases (binary rain and graphs) -->
-<canvas id="binary-canvas"></canvas>
-<canvas id="graph-canvas"></canvas>
 
-<div class="redirect-overlay" aria-live="polite">Opening...</div>
+<canvas id="walk" aria-hidden="true"></canvas>
 
-<!-- Subtle textual overlay for binary/math content -->
-<div class="math-overlay" aria-hidden="true"></div>
-<nav>
-    <h2 class="logo"><span id="typing-name"></span><span class="cursor"></span></h2>
-    <ul>
-        <li><a href="index.html" class="active" aria-current="page">Home</a></li>
-        <li><a href="projects.html">Projects</a></li>
-        <li><a href="notes.html">Technical Notes</a></li>
-        <li><a href="blog.html">Blog</a></li>
-    </ul>
-    <div class="social">
-        <a id="github-link" class="external-transition" href="https://github.com/vaibhaviagarwal" aria-label="GitHub" title="GitHub">
-            <!-- GitHub mark (simple) -->
-            <svg width="18" height="18" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82A7.6 7.6 0 018 4.6c.68.003 1.36.092 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.19 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
-            </svg>
-        </a>
+<main class="shell">
 
-        <a id="linkedin-link" class="external-transition" href="https://linkedin.com/in/vaibhavi-agarwal-28b6481b3" aria-label="LinkedIn" title="LinkedIn">
-            <!-- LinkedIn mark -->
-            <svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M4.98 3.5C4.98 4.88 3.88 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8h4v14h-4V8zm7.5 0h3.8v2h.1c.5-.9 1.8-1.8 3.7-1.8 4 0 4.8 2.5 4.8 5.8V22H18v-6.2c0-1.5 0-3.5-2.2-3.5-2.3 0-2.6 1.7-2.6 3.4V22H8V8z"/>
-            </svg>
-        </a>
+  <div class="cols">
 
-        <a id="email-link" href="mailto:vagarwal2077@gmail.com" aria-label="Email" title="Email">
-            <!-- envelope -->
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M2 6.5A2.5 2.5 0 014.5 4h15A2.5 2.5 0 0122 6.5v11A2.5 2.5 0 0119.5 20h-15A2.5 2.5 0 012 18.5v-12zM4.5 6L12 11l7.5-5" stroke-width="0"/>
-                <path d="M3 7.2v10.3c0 .99.8 1.5 1.5 1.5h15c.7 0 1.5-.5 1.5-1.5V7.2l-9 6-9-6z"/>
-            </svg>
-        </a>
+    <!-- ---------- identity ---------- -->
+    <section>
+      <div class="idhead">
+        <img class="portrait" src="vaibhavi.JPG" alt="Vaibhavi Agarwal">
+        <div>
+          <p class="eyebrow">2A · Honours Math (Co-op)<br>UWaterloo</p>
+          <h1 class="name">Vaibhavi<br>Agarwal</h1>
+        </div>
+      </div>
+
+      <p class="intro">hi! i'm vaibhavi. i do math at waterloo, play badminton, and overthink poker hands.</p>
+
+      <p class="now">
+        <b>Currently</b>
+        Research assistant in business analytics at <em>TUHH, Hamburg</em> — building a desktop app so non-technical researchers can use ConFlowGen without touching Python.
+      </p>
+
+      <ul class="facts">
+        <li>President's Scholarship of Distinction, <b>UWaterloo 2025</b></li>
+        <li>Reading computational origami and flat-foldability in the <b>Women in Math Directed Reading Program</b></li>
+        <li>Coached 30+ junior players at a volunteer-run badminton club for three years</li>
+        <li>Ethics bowl. I will argue about moral philosophy well past 1am</li>
+        <li>Poker club regular — tight early, loose later, Tuesdays and Thursdays</li>
+      </ul>
+
+      <nav class="links" aria-label="Elsewhere">
+        <a class="primary" href="resume.pdf" target="_blank" rel="noopener">resume</a>
+        <a href="mailto:v32agarw@uwaterloo.ca">email</a>
+        <a href="https://github.com/vaibhaviagarwal" target="_blank" rel="noopener">github</a>
+        <a href="https://linkedin.com/in/vaibhavi-agarwal-28b6481b3" target="_blank" rel="noopener">linkedin</a>
+      </nav>
+    </section>
+
+    <!-- ---------- panel ---------- -->
+    <section class="card">
+      <div class="tabs" role="tablist" aria-label="Sections">
+        <button class="tab" role="tab" id="t-projects" aria-controls="p-projects" aria-selected="true">projects</button>
+        <button class="tab" role="tab" id="t-exp" aria-controls="p-exp" aria-selected="false">experience</button>
+        <button class="tab" role="tab" id="t-play" aria-controls="p-play" aria-selected="false">how i work</button>
+        <button class="tab" role="tab" id="t-art" aria-controls="p-art" aria-selected="false">art</button>
+        <button class="tab" role="tab" id="t-trips" aria-controls="p-trips" aria-selected="false">trips</button>
+        <button class="tab" role="tab" id="t-log" aria-controls="p-log" aria-selected="false">logs</button>
+      </div>
+
+      <!-- projects -->
+      <div class="panel" role="tabpanel" id="p-projects" aria-labelledby="t-projects" tabindex="0">
+        <p class="lede">Things I built because I wanted them to exist. Paid work is under experience.</p>
+
+        <article class="project">
+          <p class="num">01</p>
+          <div class="phead">
+            <h3>empowHER<span class="badge">IBM runner-up</span></h3>
+            <!-- VAIBHAVI: paste the repo url over the # — links with # hide themselves -->
+            <a class="repo" href="#" target="_blank" rel="noopener">repo ↗</a>
+          </div>
+          <p class="stack">NEXT.JS · TYPESCRIPT · FASTAPI · IBM WATSONX.AI</p>
+          <p class="body">An AI healthcare platform that transcribes a visit and writes the care plan from it. The backend turns unstructured medical dictation into structured JSON through watsonx LLMs; the dashboard tracks care-readiness scores and symptom trends. Runner-up at GenAI '26.</p>
+        </article>
+
+        <article class="project">
+          <p class="num">02</p>
+          <div class="phead">
+            <h3>Settlement assistant</h3>
+            <a class="repo" href="#" target="_blank" rel="noopener">repo ↗</a>
+          </div>
+          <p class="stack">REACT · FIREBASE · GOOGLE MAPS · GEMINI</p>
+          <p class="body">Newcomer guidance across housing, employment and services, personalised by profile, with a multilingual chatbot answering in 20+ languages. I moved countries once; the paperwork is worse than the flight.</p>
+        </article>
+
+        <article class="project">
+          <p class="num">03</p>
+          <div class="phead">
+            <h3>ShantiChat</h3>
+            <a class="repo" href="#" target="_blank" rel="noopener">repo ↗</a>
+          </div>
+          <p class="stack">PYTHON · LLM · CBT + HINDU PHILOSOPHY</p>
+          <p class="body">A wellness chatbot for talking through a bad day — CBT-style prompting blended with gentle Hindu philosophy. Support, not medical care.</p>
+          <video controls preload="metadata" playsinline src="shanti_chat.mp4"></video>
+        </article>
+
+        <article class="project">
+          <p class="num">04</p>
+          <div class="phead">
+            <h3>Waterloo course finder</h3>
+            <a class="repo" href="#" target="_blank" rel="noopener">repo ↗</a>
+          </div>
+          <p class="stack">JAVA 17 · SWING · MAVEN · GSON</p>
+          <p class="body">Type a course code, get title, prereqs, coreqs and antireqs immediately. Built it because the official search took four clicks too many.</p>
+          <video controls preload="metadata" playsinline src="finder-demo.mp4"></video>
+        </article>
+      </div>
+
+      <!-- experience -->
+      <div class="panel" role="tabpanel" id="p-exp" aria-labelledby="t-exp" tabindex="0" hidden>
+        <article class="role">
+          <h3>Research assistant, business analytics</h3>
+          <p class="rmeta">Hamburg University of Technology (TUHH) · Hamburg · Apr 2026 – present</p>
+          <ul class="rlist">
+            <li>Built a full-stack desktop app (React, FastAPI, Electron) for ConFlowGen, an open-source PyPI library, so non-technical researchers can generate synthetic maritime container datasets without Python or a CLI.</li>
+            <li>Architected a REST API wrapping the ConFlowGen Python API — SSE real-time log streaming, SQLite scenario management, CSV import, and zero-dependency deployment via a bundled Python 3.12 runtime.</li>
+            <li>Engineered a data-cleaning pipeline over 5,000 inland waterway notices across four countries, parsing nested JSON and standardising mixed-format timestamps into a validated 4,743-row export.</li>
+          </ul>
+        </article>
+
+        <article class="role">
+          <h3>Directed reading program participant</h3>
+          <p class="rmeta">Combinatorics &amp; Optimization, UWaterloo (WIMDRP) · May 2026 – present</p>
+          <ul class="rlist">
+            <li>Selected for the competitive Women in Mathematics DRP to study computational origami and geometric folding theory under faculty mentorship.</li>
+            <li>Working through flat-foldability, crease-pattern validity, and graph-theoretic models of fold sequences.</li>
+          </ul>
+        </article>
+
+        <article class="role">
+          <h3>Editor-in-chief</h3>
+          <p class="rmeta">Humberside Collegiate Institute · Toronto · Sep 2024 – Jul 2025</p>
+          <ul class="rlist">
+            <li>Directed 10 subteams and 30+ contributors to produce and deliver the annual yearbook to a student body of 2,000+.</li>
+            <li>Coordinated across clubs, student council, faculty and administration, and shot original event photography.</li>
+          </ul>
+        </article>
+
+        <article class="role">
+          <h3>Assistant badminton coach</h3>
+          <p class="rmeta">Etobicoke Junior Badminton Club · Toronto · Sep 2022 – Jul 2025</p>
+          <ul class="rlist">
+            <li>Coached 30+ youth players over three years through structured drills and individual feedback.</li>
+            <li>Managed a volunteer team, tracking schedules and service hours.</li>
+          </ul>
+        </article>
+      </div>
+
+      <!-- how i play -->
+      <div class="panel" role="tabpanel" id="p-play" aria-labelledby="t-play" tabindex="0" hidden>
+        <p class="lede">Not a skills list — the resume has that.</p>
+        <ul class="play">
+          <li>
+            <strong>I get tighter before I get bolder.</strong>
+            <p>I like to understand the room before I commit to a direction. Whether I'm looking at a dataset, working through an argument, or solving a problem, I enjoy gathering the information that others might skip past. Once I understand the shape of the problem, I move quickly.</p>
+          </li>
+          <li>
+            <strong>I learn by teaching.</strong>
+            <p>Coaching beginners made me better than playing did. Breaking something down for someone who couldn't do it yet forced me to understand it precisely, not approximately. It's also how I tend to work with teams: if I can explain something simply, I probably understand it well enough to improve it.</p>
+          </li>
+          <li>
+            <strong>I look for the simplest path that works.</strong>
+            <p>I like getting to the point. I'm naturally drawn to finding the direct route through a problem, cutting steps that don't add value, and making complicated things easier to navigate. I care about efficiency, but not for its own sake — the goal is to make the outcome clearer and better.</p>
+          </li>
+          <li>
+            <strong>I build for the person who doesn't know yet.</strong>
+            <p>This is probably the through-line in everything I do. I'm interested in taking something that only works if you already have the context and making it accessible to someone who doesn't. A container dataset. A course lookup. Navigating a new country. A first badminton lesson. Different problems, same instinct: understand the system deeply enough to make the way in easier for someone else.</p>
+          </li>
+        </ul>
+        <p class="close">That's how I tend to contribute. I ask questions before I make assumptions, learn quickly by getting close to the problem, simplify where I can, and try to leave things easier to understand than I found them.</p>
+      </div>
+
+      <!-- art -->
+      <div class="panel" role="tabpanel" id="p-art" aria-labelledby="t-art" tabindex="0" hidden>
+        <p class="lede">My mum paints, properly. I was made to learn young, and I keep coming back to it.</p>
+        <div class="art">
+          <!-- VAIBHAVI: one <figure> per piece. drop the image in this folder and copy the block. -->
+          <figure>
+            <img src="painting.jpg" alt="Painting by Vaibhavi Agarwal">
+            <figcaption>Untitled<span>Acrylic</span></figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <!-- trips -->
+      <div class="panel" role="tabpanel" id="p-trips" aria-labelledby="t-trips" tabindex="0" hidden>
+        <p class="lede">Places I've been, and the ones I keep planning. I photograph everything — it's how I hold onto a trip in detail rather than in general.</p>
+        <!-- VAIBHAVI: states are went / no / yet -->
+        <ul class="trips">
+          <li data-trip="hamburg"><span class="place">Hamburg</span><span class="state went">went</span></li>
+          <li data-trip="kolkata"><span class="place">Kolkata</span><span class="state went">went</span></li>
+          <li data-trip="berlin"><span class="place">Berlin, on a weekend budget</span><span class="state yet">not yet</span></li>
+          <li data-trip="iceland"><span class="place">Iceland, ring road, allegedly two weeks</span><span class="state no">didn't go</span></li>
+          <li data-trip="montreal"><span class="place">Montréal, three separate times planned</span><span class="state no">didn't go</span></li>
+        </ul>
+
+        <p class="triphint">Click a place I've been to deal the hand.</p>
+      </div>
+
+      <!-- logs -->
+      <div class="panel" role="tabpanel" id="p-log" aria-labelledby="t-log" tabindex="0" hidden>
+        <p class="lede">Things I keep track of, loosely.</p>
+
+        <section class="poker">
+          <p class="filmtag">Poker log · Tuesdays and Thursdays</p>
+          <div class="pstats" id="pstats"></div>
+          <canvas id="spark" height="70" aria-label="Cumulative result across sessions"></canvas>
+          <ul class="plog" id="plog"></ul>
+          <p class="pnote">Kept honestly, including the nights the ego called.</p>
+        </section>
+
+        <div class="nowgrid">
+          <div class="receipt" id="receipt"></div>
+
+          <article class="film">
+            <p class="filmtag">Film I'm thinking about</p>
+            <h3>REPLACE ME</h3>
+            <p class="filmmeta">Director · Year · watched TODO</p>
+            <p class="rating" aria-label="rating out of 5">
+              <span class="on"></span><span class="on"></span><span class="on"></span><span></span><span></span>
+            </p>
+            <p class="filmbody">Two or three sentences on why it stuck. Replace this with something you actually watched — an opinion in your own words is worth more here than a plot summary.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ---------- photo deck ---------- -->
+  <div class="deck-overlay" id="deck-overlay" hidden>
+    <div class="deck-stage" role="dialog" aria-modal="true" aria-labelledby="deck-title">
+      <p class="deck-title" id="deck-title"></p>
+      <div class="deck" id="deck"></div>
+      <div class="deck-bar">
+        <button class="deck-nav" id="deck-prev" type="button" aria-label="Previous photo">‹</button>
+        <span class="deck-count" id="deck-count"></span>
+        <button class="deck-nav" id="deck-next" type="button" aria-label="Next photo">›</button>
+      </div>
+      <p class="deck-hint">click the card to shuffle · esc or click away to fold</p>
     </div>
-</nav>
+  </div>
 
-<section class="hero">
-    <div class="hero-text">
-        <h1>Math @ UWaterloo -</h1>
-        <h2 class="accent">Dissecting problems.</h2>
-        <h3 class="accent subline">Building intuition.</h3>
-        <p>
-            Hi! I'm Vaibhavi Agarwal, a Mathematics undergraduate at the University of Waterloo exploring probability, data science, and financial modeling.
-        </p>
-    </div>
+  <!-- ---------- footer ---------- -->
+  <footer class="foot">
+    <p class="aschi">আসছি · aa rahi hoon
+      <span>There's no word for goodbye in Bengali or Hindi. You say "I'm coming back."</span>
+    </p>
+    <p class="epsilon">
+      <b>∀ ε &gt; 0 ∃ δ &gt; 0 : |x − a| &lt; δ ⟹ |f(x) − L| &lt; ε</b><br>
+      as close as you like. never quite there.
+    </p>
+  </footer>
 
-    <div class="hero-image">
-        <img src="vaibhavi.JPG" alt="Vaibhavi Agarwal">
-    </div>
-</section>
-
-<button class="scroll-indicator" type="button" aria-label="Scroll to About Me">
-    <span>scroll</span>
-    <div class="scroll-arrow"></div>
-</button>
-
-<section class="about" id="about">
-    <div class="about-content">
-        <h2>About Me</h2>
-        <p class="about-body">I am a first year Honours Mathematics student at the University of Waterloo drawn to problems that begin messy and demand precision. Data science and machine learning interest me because they connect mathematical thinking to real world systems and force clarity in the face of noise.</p>
-        <p class="about-body">I have been coding since Grade 6, starting with Scratch and continuing consistently through high school. What began as curiosity became a way of thinking. I build projects both in school and independently because I enjoy designing systems that are logical, efficient, and intentional. You can explore some of my work to see that mindset in action.</p>
-        <p class="about-body">That same focus on clarity shapes how I approach ideas beyond code. Through Ethics Bowl, I learned to engage with complex issues thoughtfully, consider opposing perspectives, and reason through ambiguity. It strengthened my commitment to fairness, openness, and integrity, values I carry into every team I join.</p>
-        <p class="about-body">I am competitive and strategy driven. I played badminton in high school and served as an assistant coach at a volunteer-run, low-cost club built to keep the sport accessible. I mentored younger players and managed volunteers. I am also a regular at poker club, drawn to the probability, discipline, and pattern recognition the game demands.</p>
-        <p class="about-body">Moving from India to Canada pushed me to adapt quickly and communicate across different environments. As a tutor and Editor in Chief of Yearbook, I learned how to bring clarity and cohesion to collaborative teams.</p>
-        <p class="about-body">Whether in code, competition, or conversation, I look for the system beneath the surface and work to make complexity manageable.</p>
-    </div>
-
-    <div class="sticker-cloud" aria-label="About me stickers">
-        <span class="sticker sticker-matcha" role="img" aria-label="Matcha">
-            <img src="matcha.jpg" alt="" class="sticker-img" aria-hidden="true">
-        </span>
-        <span class="sticker sticker-paint" role="img" aria-label="Painting">
-            <img src="painting.jpg" alt="" class="sticker-img" aria-hidden="true">
-        </span>
-        <span class="sticker sticker-badminton" role="img" aria-label="Badminton">
-            <img src="badminton.jpg" alt="" class="sticker-img" aria-hidden="true">
-        </span>
-        <span class="sticker sticker-cat" role="img" aria-label="Cat">
-            <img src="cat.jpg" alt="" class="sticker-img" aria-hidden="true">
-        </span>
-        <span class="sticker sticker-food" role="img" aria-label="Asian food">
-            <img src="rasgulla.jpg" alt="" class="sticker-img" aria-hidden="true">
-        </span>
-        <span class="sticker sticker-roots" role="img" aria-label="Indian Bengali">
-            <img src="indianflag.jpg" alt="" class="sticker-img" aria-hidden="true">
-        </span>
-        <span class="sticker sticker-hindu" role="img" aria-label="Hindu">
-            <img src="hindu.png" alt="" class="sticker-img" aria-hidden="true">
-        </span>
-        <span class="sticker sticker-photo" role="img" aria-label="Photography">
-            <img src="photography.png" alt="" class="sticker-img" aria-hidden="true">
-        </span>
-        <span class="sticker sticker-hiking" role="img" aria-label="Hiking">
-            <img src="ilovehking.jpg" alt="" class="sticker-img" aria-hidden="true">
-        </span>
-        <span class="sticker sticker-giraffe" role="img" aria-label="Giraffe">
-            <img src="giraffe.jpg" alt="" class="sticker-img" aria-hidden="true">
-        </span>
-    </div>
-</section>
+</main>
 
 <script>
+/* ==========================================================================
+   vaibhavi agarwal — nelsonkang-style single page
+
+   >>> EVERYTHING YOU UPDATE REGULARLY LIVES IN SECTION 1 <<<
+        trip photos · poker sessions · last.fm settings
+   Sections 2-7 are plumbing. You shouldn't need to touch them.
+
+   1 · YOUR CONTENT
+   2 · helpers
+   3 · tabs
+   4 · trip photo deck
+   5 · poker log
+   6 · music receipt
+   7 · background walker
+
+   Text that isn't in here (bio, projects, experience, art, film) is written
+   directly in the HTML above — look for the <!-- comment --> headings.
+   ========================================================================== */
 (() => {
-    const binaryCanvas = document.getElementById('binary-canvas');
-    const graphCanvas = document.getElementById('graph-canvas');
-    const overlay = document.querySelector('.math-overlay');
 
-    // Resize canvases to fit window (handle high-DPI properly)
-    let dpr = window.devicePixelRatio || 1;
-    function resize() {
-        dpr = window.devicePixelRatio || 1;
-        // use layout/client sizes (CSS pixels) to avoid differences across browsers
-        const cssW = document.documentElement.clientWidth || window.innerWidth;
-        const cssH = document.documentElement.clientHeight || window.innerHeight;
-        // set backing store size in device pixels
-        binaryCanvas.width = Math.floor(cssW * dpr);
-        binaryCanvas.height = Math.floor(cssH * dpr);
-        graphCanvas.width = Math.floor(cssW * dpr);
-        graphCanvas.height = Math.floor(cssH * dpr);
-        // set CSS display size explicitly to match layout
-        binaryCanvas.style.width = cssW + 'px';
-        binaryCanvas.style.height = cssH + 'px';
-        graphCanvas.style.width = cssW + 'px';
-        graphCanvas.style.height = cssH + 'px';
-        // scale drawing context so 1 unit = 1 css pixel
-        bCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        gCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        initColumns();
-    }
+/* ==========================================================================
+   1 · YOUR CONTENT
+   ========================================================================== */
 
-    window.addEventListener('resize', resize);
+/* --- TRIP PHOTOS ---------------------------------------------------------
+   The key must match data-trip="..." on the trip's <li> in the HTML above.
+   Each photo is [ 'filename.jpg', 'one line caption' ].
+   Drop the image files straight into this folder, next to index.html.
+   Only trips badged "went" are clickable. A went-trip with no photos here
+   still opens and simply says there are none yet.
+--------------------------------------------------------------------------- */
+const TRIPS = {
+  hamburg: [
+    ['hamburg-1.jpg', 'First week. The harbour never actually stops.'],
+    ['hamburg-2.jpg', 'Walked this stretch most evenings.']
+  ],
+  kolkata: [
+    ['kolkata-1.jpg', 'The same corner my mum grew up on.']
+  ]
+};
 
-    // --------------- Binary rain (matrix-style) ----------------
-    const bCtx = binaryCanvas.getContext('2d');
-    // binary-only falling characters
-    const chars = ['0','1'];
-    const blue = '102,204,255';
-    const blue2 = '60,160,255';
-    let columns = [];
-    let fontSize = 14;
+/* --- POKER LOG -----------------------------------------------------------
+   One line per session: [ 'YYYY-MM-DD', result, 'optional note' ]
+   Result is in dollars; negative for a losing night. Newest at the bottom.
+   While this list is empty the tab shows the "tracking from September" note
+   and hides the stats, chart and list automatically.
+--------------------------------------------------------------------------- */
+const SESSIONS = [
+  // ['2026-09-08', 18, 'ran quiet, folded a lot'],
+];
 
-    function initColumns() {
-        // choose a smaller font size so there are enough columns to cover wide screens
-        fontSize = Math.max(16, Math.floor(window.innerWidth / 110));
-        const cssW = binaryCanvas.width / dpr;
-        const cssH = binaryCanvas.height / dpr;
-        const cols = Math.ceil(cssW / fontSize) + 2; // slight extra to avoid gaps at edges
-        columns = new Array(cols).fill(0).map(() => ({y: Math.random() * cssH}));
-        bCtx.font = fontSize + 'px monospace';
-    }
+/* --- MUSIC ---------------------------------------------------------------
+   Reads your last.fm, which scrobbles from Spotify automatically.
+   period: 7day · 1month · 3month · 12month · overall
+   Change label to match whatever period you pick.
+--------------------------------------------------------------------------- */
+const LASTFM = {
+  user:   'vaibhaviagar696',
+  key:    '87d3f3ddb22d342144b155fe4ff51d61',
+  period: '1month',
+  label:  'LAST 30 DAYS'
+};
 
-    function drawBinary() {
-        // clear using CSS pixel coords (canvas is scaled by dpr)
-        const cssW = binaryCanvas.width / dpr;
-        const cssH = binaryCanvas.height / dpr;
-        bCtx.clearRect(0,0,cssW,cssH);
-        // translucent dark fill for subtle trailing effect
-        bCtx.fillStyle = 'rgba(2,6,23,0.12)';
-        bCtx.fillRect(0,0,cssW,cssH);
+/* ==========================================================================
+   Nothing below this line needs editing.
+   ========================================================================== */
 
-        for (let i = 0; i < columns.length; i++) {
-            const x = i * fontSize;
-            const col = columns[i];
-            const text = chars[Math.floor(Math.random() * chars.length)];
-            // softer glow for character (blue variants only)
-            bCtx.shadowColor = Math.random() > 0.6 ? `rgba(${blue},0.7)` : `rgba(${blue2},0.7)`;
-            bCtx.shadowBlur = 2 + Math.random()*3;
-            bCtx.fillStyle = Math.random() > 0.6 ? `rgba(${blue},0.68)` : `rgba(${blue2},0.68)`;
-            bCtx.fillText(text, x, col.y);
 
-            col.y += fontSize * 0.45 + Math.random() * 1; // much slower fall
-            const cssH2 = binaryCanvas.height / dpr;
-            if (col.y > cssH2 + Math.random() * 300) {
-                col.y = -10 - Math.random() * 60;
-            }
-        }
-    }
+/* ==========================================================================
+   2 · helpers
+   ========================================================================== */
 
-    // --------------- Graphs (neon sine / data-lines) -----------
-    const gCtx = graphCanvas.getContext('2d');
-    let t = 0;
+const $  = (sel) => document.querySelector(sel);
+const $$ = (sel) => [...document.querySelectorAll(sel)];
 
-    // draw subtle grid + gentle data curve behind the binary rain
-    function drawGraphs() {
-        const cssW = graphCanvas.width / dpr;
-        const cssH = graphCanvas.height / dpr;
-        gCtx.clearRect(0,0,cssW,cssH);
+const esc = (s) => String(s).replace(/[&<>"]/g, c =>
+  ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
-        // faint background grid
-        gCtx.strokeStyle = `rgba(${blue},0.03)`;
-        gCtx.lineWidth = 1;
-        const gridSize = 40;
-        gCtx.beginPath();
-        for (let x = 0; x < cssW; x += gridSize) {
-            gCtx.moveTo(x + 0.5, 0);
-            gCtx.lineTo(x + 0.5, cssH);
-        }
-        for (let y = 0; y < cssH; y += gridSize) {
-            gCtx.moveTo(0, y + 0.5);
-            gCtx.lineTo(cssW, y + 0.5);
-        }
-        gCtx.stroke();
 
-        // gentle animated curve (mostly visible behind left area)
-        gCtx.beginPath();
-        const amplitude = Math.min(80, cssH * 0.08);
-        const centerY = cssH * 0.45;
-        for (let px = 0; px <= cssW; px += 8) {
-            // slower horizontal phase so curve feels calm
-            const phase = (px * 0.008) + t * 0.06;
-            const y = centerY + Math.sin(phase) * amplitude * (0.6 + 0.4 * Math.cos(px * 0.002));
-            if (px === 0) gCtx.moveTo(px, y);
-            else gCtx.lineTo(px, y);
-        }
-        gCtx.strokeStyle = `rgba(${blue},0.16)`;
-        gCtx.lineWidth = 2;
-        gCtx.shadowColor = `rgba(${blue},0.06)`;
-        gCtx.shadowBlur = 6;
-        gCtx.stroke();
-    }
+/* ==========================================================================
+   3 · tabs
+   ========================================================================== */
 
-    // Overlay textual binary/math content (light, low-opacity)
-    function populateOverlay() {
-        // keep overlay empty — graph canvas provides the subtle background
-        overlay.textContent = '';
-    }
+const tabs = $$('.tab');
 
-    // Typing animation for name
-    function typeNameInNav() {
-        const name = 'Vaibhavi Agarwal';
-        const nameElement = document.getElementById('typing-name');
-        const cursor = document.querySelector('.cursor');
-        let index = 0;
-        const typingSpeed = 60; // ms per character
+function selectTab(tab) {
+  tabs.forEach(t => {
+    const on = t === tab;
+    t.setAttribute('aria-selected', on);
+    document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+  });
+  if (tab.id === 't-log') drawSpark();
+}
 
-        function type() {
-            if (index < name.length) {
-                nameElement.textContent += name[index];
-                index++;
-                setTimeout(type, typingSpeed);
-            } else {
-                // animation complete, keep cursor blinking
-                cursor.style.animation = 'blink 0.6s infinite';
-            }
-        }
+tabs.forEach((t, i) => {
+  t.addEventListener('click', () => selectTab(t));
+  t.addEventListener('keydown', (e) => {
+    const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+    if (!d) return;
+    e.preventDefault();
+    const next = tabs[(i + d + tabs.length) % tabs.length];
+    next.focus();
+    selectTab(next);
+  });
+});
 
-        type();
-    }
+/* a repo link still set to "#" hides itself rather than going nowhere */
+$$('.repo').forEach(a => {
+  if (a.getAttribute('href') === '#') a.remove();
+});
 
-    // animation loop
-    function loop() {
-        t += 0.006; // slower global time progression
-        drawBinary();
-        drawGraphs();
-        requestAnimationFrame(loop);
-    }
+/* an artwork whose file isn't in the folder yet removes itself */
+$$('.art img').forEach(img => {
+  img.addEventListener('error', () => {
+    const fig = img.closest('figure');
+    if (fig) fig.remove();
+  });
+});
 
-    // Scroll reveal animations using Intersection Observer
-    function setupScrollAnimations() {
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+/* the film card hides itself until it's a real film */
+const filmEl = $('.film h3');
+if (filmEl && /^REPLACE ME$/i.test(filmEl.textContent.trim())) {
+  $('.film').remove();
+}
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
 
-        // Observe scroll-fade elements
-        document.querySelectorAll('.scroll-fade, .scroll-slide').forEach(el => {
-            observer.observe(el);
-        });
-    }
+/* ==========================================================================
+   4 · trip photo deck
+   ========================================================================== */
 
-    // Hide scroll indicator on scroll
-    function setupScrollIndicator() {
-        const scrollIndicator = document.querySelector('.scroll-indicator');
-        const aboutSection = document.getElementById('about');
-        let hasScrolled = false;
+const overlay  = $('#deck-overlay');
+const deckEl   = $('#deck');
+const deckBar  = $('.deck-bar');
+const deckHint = $('.deck-hint');
+let deckPhotos = [], deckIdx = 0, lastFocus = null;
 
-        if (scrollIndicator && aboutSection) {
-            scrollIndicator.addEventListener('click', () => {
-                aboutSection.scrollIntoView({ behavior: 'smooth' });
-            });
-        }
+function layoutDeck() {
+  const n = deckPhotos.length;
+  [...deckEl.children].forEach((card, i) => {
+    let off = (i - deckIdx + n) % n;
+    if (off > 3) off = 4;
+    card.dataset.off = off;
+    card.style.zIndex = String(20 - off);
+  });
+  $('#deck-count').textContent = (deckIdx + 1) + ' / ' + n;
+}
 
-        window.addEventListener('scroll', () => {
-            if (!hasScrolled && window.scrollY > 100) {
-                scrollIndicator.classList.add('hidden');
-                hasScrolled = true;
-            } else if (hasScrolled && window.scrollY < 50) {
-                scrollIndicator.classList.remove('hidden');
-                hasScrolled = false;
-            }
-        }, { passive: true });
-    }
+function step(dir) {
+  const n = deckPhotos.length;
+  if (n < 2) return;
+  deckIdx = (deckIdx + dir + n) % n;
+  layoutDeck();
+}
 
-    function setupPageTransitions() {
-        document.addEventListener('click', (event) => {
-            const link = event.target.closest('a');
-            if (!link) return;
+function showEmptyCard() {
+  deckBar.hidden = true;
+  deckHint.textContent = 'esc or click away to fold';
+  deckEl.innerHTML =
+    '<figure class="pcard pcard-empty" data-off="0"><p>No photos to display at the moment.</p></figure>';
+}
 
-            const href = link.getAttribute('href');
-            if (!href || href.startsWith('#') || href.startsWith('mailto:') || link.target === '_blank') {
-                return;
-            }
+function openDeck(title, photos) {
+  deckPhotos = photos || [];
+  deckIdx = 0;
+  lastFocus = document.activeElement;
+  $('#deck-title').textContent = title;
 
-            if (link.classList.contains('external-transition')) {
-                event.preventDefault();
-                document.body.classList.add('is-exiting');
-                setTimeout(() => {
-                    window.location.href = link.href;
-                }, 220);
-            }
-        });
-    }
+  const empty = deckPhotos.length === 0;
+  deckBar.hidden = empty || deckPhotos.length < 2;
+  deckHint.textContent = empty
+    ? 'esc or click away to fold'
+    : 'click the card to shuffle · esc or click away to fold';
 
-    // startup
-    resize();
-    populateOverlay();
-    typeNameInNav();
-    setupScrollAnimations();
-    setupScrollIndicator();
-    setupPageTransitions();
-    loop();
+  deckEl.innerHTML = empty
+    ? '<figure class="pcard pcard-empty" data-off="0"><p>No photos to display at the moment.</p></figure>'
+    : deckPhotos.map(([src, cap]) =>
+        '<figure class="pcard"><img src="' + esc(src) + '" alt="' + esc(cap) + '">' +
+        '<figcaption>' + esc(cap) + '</figcaption></figure>'
+      ).join('');
+
+  if (!empty) {
+    [...deckEl.children].forEach(c => {
+      c.addEventListener('click', () => step(1));
+      /* a card whose image file isn't there yet drops out of the hand */
+      c.querySelector('img').addEventListener('error', () => {
+        const i = [...deckEl.children].indexOf(c);
+        if (i > -1) deckPhotos.splice(i, 1);
+        c.remove();
+        if (!deckPhotos.length) return showEmptyCard();
+        deckIdx = 0;
+        deckBar.hidden = deckPhotos.length < 2;
+        layoutDeck();
+      });
+    });
+    layoutDeck();
+  }
+
+  overlay.hidden = false;
+  document.body.classList.add('locked');
+  requestAnimationFrame(() => overlay.classList.add('on'));
+  (empty ? overlay : $('#deck-next')).focus();
+}
+
+function closeDeck() {
+  overlay.classList.remove('on');
+  document.body.classList.remove('locked');
+  setTimeout(() => { overlay.hidden = true; deckEl.innerHTML = ''; }, 220);
+  if (lastFocus) lastFocus.focus();
+}
+
+overlay.addEventListener('click', (e) => { if (e.target === overlay) closeDeck(); });
+$('#deck-next').addEventListener('click', () => step(1));
+$('#deck-prev').addEventListener('click', () => step(-1));
+
+document.addEventListener('keydown', (e) => {
+  if (overlay.hidden) return;
+  if (e.key === 'Escape')     closeDeck();
+  if (e.key === 'ArrowRight') step(1);
+  if (e.key === 'ArrowLeft')  step(-1);
+});
+
+let swipeX = null;
+overlay.addEventListener('touchstart', (e) => { swipeX = e.touches[0].clientX; }, { passive: true });
+overlay.addEventListener('touchend', (e) => {
+  if (swipeX === null) return;
+  const dx = e.changedTouches[0].clientX - swipeX;
+  if (Math.abs(dx) > 45) step(dx < 0 ? 1 : -1);
+  swipeX = null;
+}, { passive: true });
+
+/* only places badged "went" become clickable */
+$$('.trips li[data-trip]').forEach(li => {
+  if (!li.querySelector('.state.went')) return;
+  const photos = TRIPS[li.dataset.trip] || [];
+  const place  = li.querySelector('.place');
+  const label  = place.textContent;
+  place.innerHTML = '<button class="tripbtn" type="button">' + esc(label) +
+    (photos.length ? '<span class="tripn">' + photos.length + '</span>' : '') +
+    '</button>';
+  place.querySelector('button').addEventListener('click', () => openDeck(label, photos));
+});
+
+
+/* ==========================================================================
+   5 · poker log
+   ========================================================================== */
+
+const money = (n) => (n >= 0 ? '+$' : '−$') + Math.abs(n);
+
+function renderPoker() {
+  if (!SESSIONS.length) {
+    $('#pstats').outerHTML =
+      '<p class="pempty">Tracking from September 2026. Every session, wins and losses ' +
+      'both — a record is only worth keeping if it\'s complete.</p>';
+    $('#spark').remove();
+    $('#plog').remove();
+    $('.pnote').remove();
+    return;
+  }
+
+  const net  = SESSIONS.reduce((s, x) => s + x[1], 0);
+  const wins = SESSIONS.filter(x => x[1] > 0).length;
+  const best = Math.max(...SESSIONS.map(x => x[1]));
+
+  $('#pstats').innerHTML = [
+    ['sessions', SESSIONS.length],
+    ['net', money(net)],
+    ['winning nights', wins + '/' + SESSIONS.length],
+    ['best', money(best)]
+  ].map(([k, v]) =>
+    '<div><span>' + k + '</span><b class="' +
+    (String(v).startsWith('−') ? 'neg' : '') + '">' + v + '</b></div>'
+  ).join('');
+
+  $('#plog').innerHTML = SESSIONS.slice().reverse().map(([d, r, n]) =>
+    '<li><span class="pd">' + d.slice(5) + '</span>' +
+    '<span class="pn">' + esc(n || '—') + '</span>' +
+    '<span class="pr ' + (r < 0 ? 'neg' : 'pos') + '">' + money(r) + '</span></li>'
+  ).join('');
+}
+
+function drawSpark() {
+  const cv = $('#spark');
+  if (!cv || !cv.clientWidth) return;
+  const ctx = cv.getContext('2d');
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  const w = cv.clientWidth, h = 70;
+  cv.width = w * dpr; cv.height = h * dpr;
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.clearRect(0, 0, w, h);
+
+  let acc = 0;
+  const pts = [0].concat(SESSIONS.map(s => (acc += s[1])));
+  const lo = Math.min(...pts, 0), hi = Math.max(...pts, 0);
+  const pad = 8;
+  const X = i => (i / (pts.length - 1)) * (w - 2) + 1;
+  const Y = v => h - pad - ((v - lo) / ((hi - lo) || 1)) * (h - pad * 2);
+
+  ctx.strokeStyle = 'rgba(244,241,232,0.14)';
+  ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(0, Y(0)); ctx.lineTo(w, Y(0)); ctx.stroke();
+
+  ctx.strokeStyle = pts[pts.length - 1] >= 0 ? '#5dcaa5' : '#e0bd8a';
+  ctx.lineWidth = 1.6;
+  ctx.lineJoin = 'round';
+  ctx.beginPath();
+  pts.forEach((v, i) => i ? ctx.lineTo(X(i), Y(v)) : ctx.moveTo(X(i), Y(v)));
+  ctx.stroke();
+
+  ctx.fillStyle = ctx.strokeStyle;
+  ctx.beginPath();
+  ctx.arc(X(pts.length - 1), Y(pts[pts.length - 1]), 2.6, 0, 6.283);
+  ctx.fill();
+}
+
+renderPoker();
+window.addEventListener('resize', drawSpark);
+
+
+/* ==========================================================================
+   6 · music receipt
+   ========================================================================== */
+
+const RECEIPT_FALLBACK = [
+  ['Nothing scrobbled yet', 'give it a few days', ''],
+  ['Everything you play', 'lands here on its own', ''],
+  ['No upkeep required', 'that is the point', '']
+];
+
+function renderReceipt(rows, plays, last) {
+  const el = $('#receipt');
+  if (!el) return;
+  const body = rows.map(([n, a, p], i) =>
+    '<div class="rrow"><span class="i">' + String(i + 1).padStart(2, '0') + '</span>' +
+    '<span class="n">' + esc(n) + '<span class="a">' + esc(a) + '</span></span>' +
+    '<span class="d">' + (p ? '×' + p : '') + '</span></div>'
+  ).join('');
+
+  el.innerHTML =
+    '<h3>Vaibhavi&rsquo;s receipt</h3>' +
+    '<p class="rsub">TOP TRACKS &middot; ' + LASTFM.label + '</p>' +
+    '<div class="rrule"></div>' + body +
+    '<div class="rrule"></div>' +
+    '<div class="rtot"><span>ITEMS</span><span>' + rows.length + '</span></div>' +
+    (plays ? '<div class="rtot"><span>TOTAL PLAYS</span><span>' + plays + '</span></div>' : '') +
+    '<div class="barcode"></div>' +
+    (last ? '<p class="rlast">LAST PLAYED &middot; ' + esc(last) + '</p>' : '') +
+    '<p class="rfoot">THANK YOU FOR LISTENING</p>';
+}
+
+async function loadMusic() {
+  renderReceipt(RECEIPT_FALLBACK, 0, '');
+  if (!LASTFM.key) return;
+
+  const api = (method, extra) =>
+    'https://ws.audioscrobbler.com/2.0/?method=' + method +
+    '&user=' + encodeURIComponent(LASTFM.user) +
+    '&api_key=' + LASTFM.key + '&format=json' + extra;
+
+  try {
+    const [topRes, recRes] = await Promise.all([
+      fetch(api('user.gettoptracks', '&period=' + LASTFM.period + '&limit=5')),
+      fetch(api('user.getrecenttracks', '&limit=1'))
+    ]);
+
+    const top  = await topRes.json();
+    const list = top && top.toptracks && top.toptracks.track || [];
+    if (!list.length) return;
+
+    const rows  = list.map(t => [t.name, (t.artist && t.artist.name) || '', t.playcount]);
+    const plays = list.reduce((s, t) => s + Number(t.playcount || 0), 0);
+
+    let last = '';
+    try {
+      const rec = await recRes.json();
+      const r = rec && rec.recenttracks && rec.recenttracks.track && rec.recenttracks.track[0];
+      if (r) last = r.name + ' — ' + ((r.artist && r.artist['#text']) || '');
+    } catch (e) { /* the last-played line is optional */ }
+
+    renderReceipt(rows, plays, last);
+  } catch (e) {
+    /* offline, bad key, or opened from file:// — the fallback is already up */
+  }
+}
+
+loadMusic();
+
+
+/* ==========================================================================
+   7 · background walker
+   A random walk biased toward the cursor. The pull reverses inside ORBIT px,
+   so it approaches without ever arriving. Frozen on touch and for anyone
+   who has reduced motion switched on.
+   ========================================================================== */
+
+const cv  = $('#walk');
+const ctx = cv.getContext('2d');
+const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const touch   = window.matchMedia('(pointer: coarse)').matches;
+const ORBIT   = 170;
+const TRAIL   = 260;
+
+let vw = 0, vh = 0;
+let p = { x: 0, y: 0, vx: 0, vy: 0 };
+let trail = [];
+let tx = 0, ty = 0, hasMouse = false, idle = 999, clock = 0;
+
+function fitWalker() {
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  vw = window.innerWidth; vh = window.innerHeight;
+  cv.width = Math.floor(vw * dpr); cv.height = Math.floor(vh * dpr);
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+  p.x = vw * 0.5; p.y = vh * 0.55;
+  tx = p.x; ty = p.y;
+  trail = [];
+  if (reduced || touch) { ctx.clearRect(0, 0, vw, vh); frozenWalk(); }
+}
+
+function frozenWalk() {
+  let x = vw * 0.15, y = vh * 0.75, a = -0.5;
+  ctx.strokeStyle = 'rgba(93, 202, 165, 0.22)';
+  ctx.lineWidth = 1.2;
+  ctx.beginPath(); ctx.moveTo(x, y);
+  for (let i = 0; i < 500; i++) {
+    a += Math.sin(i * 0.11) * 0.24 + Math.cos(i * 0.037) * 0.15;
+    x += Math.cos(a) * 2.6; y += Math.sin(a) * 2.6;
+    ctx.lineTo(x, y);
+  }
+  ctx.stroke();
+}
+
+window.addEventListener('mousemove', (e) => {
+  tx = e.clientX; ty = e.clientY; hasMouse = true; idle = 0;
+}, { passive: true });
+window.addEventListener('mouseout', () => { hasMouse = false; });
+
+function walkFrame() {
+  clock += 0.01; idle += 1;
+  const resting = !hasMouse || idle > 110;
+
+  if (resting) {
+    tx = vw * 0.5 + Math.cos(clock * 0.4) * vw * 0.28;
+    ty = vh * 0.5 + Math.sin(clock * 0.29) * vh * 0.26;
+  }
+
+  const dx = tx - p.x, dy = ty - p.y;
+  const d  = Math.hypot(dx, dy) || 1;
+  const pull   = 0.00020 * (d - ORBIT);
+  const wander = resting ? 0.16 : 0.40;
+  const damp   = resting ? 0.955 : 0.930;
+
+  p.vx = (p.vx + (dx / d) * pull * d + (Math.random() - 0.5) * wander) * damp;
+  p.vy = (p.vy + (dy / d) * pull * d + (Math.random() - 0.5) * wander) * damp;
+  p.x += p.vx; p.y += p.vy;
+
+  trail.push([p.x, p.y]);
+  if (trail.length > TRAIL) trail.shift();
+
+  ctx.clearRect(0, 0, vw, vh);
+  for (let i = 1; i < trail.length; i++) {
+    const k = i / trail.length;
+    ctx.strokeStyle = 'rgba(93, 202, 165, ' + (k * k * 0.62).toFixed(3) + ')';
+    ctx.lineWidth = 0.6 + k * 2.1;
+    ctx.beginPath();
+    ctx.moveTo(trail[i - 1][0], trail[i - 1][1]);
+    ctx.lineTo(trail[i][0], trail[i][1]);
+    ctx.stroke();
+  }
+  ctx.fillStyle = 'rgba(93, 202, 165, 0.85)';
+  ctx.beginPath(); ctx.arc(p.x, p.y, 2.1, 0, 6.283); ctx.fill();
+
+  requestAnimationFrame(walkFrame);
+}
+
+window.addEventListener('resize', fitWalker);
+fitWalker();
+if (!reduced && !touch) walkFrame();
+
 })();
 </script>
 
