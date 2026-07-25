@@ -68,7 +68,6 @@
           <p class="num">01</p>
           <div class="phead">
             <h3>empowHER<span class="badge">IBM runner-up</span></h3>
-            <!-- VAIBHAVI: paste the repo url over the # — links with # hide themselves -->
             <a class="repo" href="#" target="_blank" rel="noopener">repo ↗</a>
           </div>
           <p class="stack">NEXT.JS · TYPESCRIPT · FASTAPI · IBM WATSONX.AI</p>
@@ -176,7 +175,6 @@
       <div class="panel" role="tabpanel" id="p-art" aria-labelledby="t-art" tabindex="0" hidden>
         <p class="lede">My mum paints, properly. I was made to learn young, and I keep coming back to it.</p>
         <div class="art">
-          <!-- VAIBHAVI: one <figure> per piece. drop the image in this folder and copy the block. -->
           <figure>
             <img src="painting.jpg" alt="Painting by Vaibhavi Agarwal">
             <figcaption>Untitled<span>Acrylic</span></figcaption>
@@ -187,13 +185,18 @@
       <!-- trips -->
       <div class="panel" role="tabpanel" id="p-trips" aria-labelledby="t-trips" tabindex="0" hidden>
         <p class="lede">Places I've been, and the ones I keep planning. I photograph everything — it's how I hold onto a trip in detail rather than in general.</p>
-        <!-- VAIBHAVI: states are went / no / yet -->
+        <!-- states: went / no / yet -->
         <ul class="trips">
           <li data-trip="hamburg"><span class="place">Hamburg</span><span class="state went">went</span></li>
           <li data-trip="kolkata"><span class="place">Kolkata</span><span class="state went">went</span></li>
-          <li data-trip="berlin"><span class="place">Berlin, on a weekend budget</span><span class="state yet">not yet</span></li>
+          <li data-trip="berlin"><span class="place">Berlin</span><span class="state went">went</span></li>
+          <li data-trip="amsterdam"><span class="place">Amsterdam</span><span class="state went">went</span></li>
+          <li data-trip="koln"><span class="place">Köln</span><span class="state went">went</span></li>
+          <li data-trip="prague"><span class="place">Prague</span><span class="state went">went</span></li>
+          <li data-trip="london"><span class="place">London</span><span class="state went">went</span></li>
+          <li data-trip="toronto"><span class="place">Toronto</span><span class="state went">went</span></li>
+          <li data-trip="montreal"><span class="place">Montréal</span><span class="state went">went</span></li>
           <li data-trip="iceland"><span class="place">Iceland, ring road, allegedly two weeks</span><span class="state no">didn't go</span></li>
-          <li data-trip="montreal"><span class="place">Montréal, three separate times planned</span><span class="state no">didn't go</span></li>
         </ul>
 
         <p class="triphint">Click a place I've been to deal the hand.</p>
@@ -258,43 +261,73 @@
 
 <script>
 /* ==========================================================================
-   vaibhavi agarwal — nelsonkang-style single page
-
-   >>> EVERYTHING YOU UPDATE REGULARLY LIVES IN SECTION 1 <<<
-        trip photos · poker sessions · last.fm settings
-   Sections 2-7 are plumbing. You shouldn't need to touch them.
-
-   1 · YOUR CONTENT
+   1 · content
    2 · helpers
    3 · tabs
    4 · trip photo deck
    5 · poker log
    6 · music receipt
    7 · background walker
-
-   Text that isn't in here (bio, projects, experience, art, film) is written
-   directly in the HTML above — look for the <!-- comment --> headings.
    ========================================================================== */
 (() => {
 
 /* ==========================================================================
-   1 · YOUR CONTENT
+   1 · content
    ========================================================================== */
 
 /* --- TRIP PHOTOS ---------------------------------------------------------
    The key must match data-trip="..." on the trip's <li> in the HTML above.
-   Each photo is [ 'filename.jpg', 'one line caption' ].
-   Drop the image files straight into this folder, next to index.html.
+   Each photo is [ 'path/to/file.jpg', 'one line caption' ], with the path
+   relative to index.html — e.g. images live in travel photos/hamburg/.
    Only trips badged "went" are clickable. A went-trip with no photos here
    still opens and simply says there are none yet.
 --------------------------------------------------------------------------- */
 const TRIPS = {
   hamburg: [
-    ['hamburg-1.jpg', 'First week. The harbour never actually stops.'],
-    ['hamburg-2.jpg', 'Walked this stretch most evenings.']
+    ['travel photos/hamburg/1.jpeg', ''],
+    ['travel photos/hamburg/2.jpeg', ''],
+    ['travel photos/hamburg/4.jpeg', ''],
+    ['travel photos/hamburg/5.jpeg', ''],
+    ['travel photos/hamburg/6.jpeg', '']
   ],
   kolkata: [
-    ['kolkata-1.jpg', 'The same corner my mum grew up on.']
+    ['travel photos/kolkata/1.jpeg', ''],
+    ['travel photos/kolkata/2.jpeg', ''],
+    ['travel photos/kolkata/3.jpeg', ''],
+    ['travel photos/kolkata/4.jpeg', ''],
+    ['travel photos/kolkata/5.jpeg', ''],
+    ['travel photos/kolkata/6.jpeg', ''],
+    ['travel photos/kolkata/7.jpeg', ''],
+    ['travel photos/kolkata/8.jpeg', ''],
+    ['travel photos/kolkata/9.jpeg', ''],
+    ['travel photos/kolkata/10.jpeg', '']
+  ],
+  berlin: [
+    ['travel photos/berlin/09A2B412-C57C-453A-A6DB-7B29BACE5D15_1_102_o.jpeg', ''],
+    ['travel photos/berlin/2475A724-AE59-42DB-A1B1-FFB348EB0F4A_1_105_c.jpeg', ''],
+    ['travel photos/berlin/7BF981BC-EF2C-461E-96B1-7AC6F20F3261_1_102_o.jpeg', '']
+  ],
+  amsterdam: [
+    ['travel photos/amsterdam/1.jpeg', ''],
+    ['travel photos/amsterdam/2.jpeg', ''],
+    ['travel photos/amsterdam/3.jpeg', ''],
+    ['travel photos/amsterdam/4.jpeg', ''],
+    ['travel photos/amsterdam/5.jpeg', '']
+  ],
+  koln: [
+    ['travel photos/koln/1.jpeg', ''],
+    ['travel photos/koln/2.jpeg', ''],
+    ['travel photos/koln/3.jpeg', ''],
+    ['travel photos/koln/4.jpeg', ''],
+    ['travel photos/koln/5.jpeg', '']
+  ],
+  prague: [
+    ['travel photos/prague/1.jpeg', ''],
+    ['travel photos/prague/2.jpeg', ''],
+    ['travel photos/prague/3.jpeg', ''],
+    ['travel photos/prague/4.jpeg', ''],
+    ['travel photos/prague/5.jpeg', ''],
+    ['travel photos/prague/6.jpeg', '']
   ]
 };
 
@@ -319,11 +352,6 @@ const LASTFM = {
   period: '7day',
   label:  'LAST 7 DAYS'
 };
-
-/* ==========================================================================
-   Nothing below this line needs editing.
-   ========================================================================== */
-
 
 /* ==========================================================================
    2 · helpers
@@ -363,7 +391,7 @@ tabs.forEach((t, i) => {
   });
 });
 
-/* a repo link still set to "#" hides itself rather than going nowhere */
+/* repo links still set to "#" remove themselves */
 $$('.repo').forEach(a => {
   if (a.getAttribute('href') === '#') a.remove();
 });
@@ -440,7 +468,7 @@ function openDeck(title, photos) {
   if (!empty) {
     [...deckEl.children].forEach(c => {
       c.addEventListener('click', () => step(1));
-      /* a card whose image file isn't there yet drops out of the hand */
+      /* a card whose image isn't found is removed from the deck */
       c.querySelector('img').addEventListener('error', () => {
         const i = [...deckEl.children].indexOf(c);
         if (i > -1) deckPhotos.splice(i, 1);
