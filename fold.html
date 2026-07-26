@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vaibhavi Agarwal</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="fold.css">
+</head>
+<body data-phase="0">
+
+<div class="glow"></div>
+
+<header class="chrome top">
+  <div class="id">
+    <button id="home" title="fold it back" aria-label="Fold it back">✻</button>
+    <div>
+      <b>Vaibhavi Agarwal</b>
+      <span>2A · honours math (co-op) · uwaterloo</span>
+    </div>
+  </div>
+  <nav class="elsewhere">
+    <a href="resume.pdf" target="_blank" rel="noopener">résumé</a>
+    <a href="mailto:v32agarw@uwaterloo.ca">email</a>
+    <a href="https://github.com/vaibhaviagarwal" target="_blank" rel="noopener">github</a>
+    <a href="https://linkedin.com/in/vaibhavi-agarwal-28b6481b3" target="_blank" rel="noopener">linkedin</a>
+  </nav>
+</header>
+
+<div id="stage">
+  <svg id="sheet" viewBox="-170 -170 340 340" aria-label="A paper windmill that folds into a lotus">
+    <defs>
+      <linearGradient id="gOut" x1="0" y1="1" x2="0" y2="0">
+        <stop offset="0"   stop-color="#2f7f68"/>
+        <stop offset=".55" stop-color="#5dcaa5"/>
+        <stop offset="1"   stop-color="#cfeadf"/>
+      </linearGradient>
+      <linearGradient id="gIn" x1="0" y1="1" x2="0" y2="0">
+        <stop offset="0"   stop-color="#b4707a"/>
+        <stop offset=".6"  stop-color="#e5a8ae"/>
+        <stop offset="1"   stop-color="#f7dfdc"/>
+      </linearGradient>
+      <radialGradient id="gCore">
+        <stop offset="0" stop-color="#f6f2e8"/>
+        <stop offset="1" stop-color="#e6c58a"/>
+      </radialGradient>
+    </defs>
+    <g id="creases" opacity="0"></g>
+    <g id="inner"></g>
+    <g id="model"></g>
+    <circle id="core" r="0" fill="url(#gCore)"/>
+    <g id="labels"></g>
+  </svg>
+</div>
+
+<figure class="print" id="print" role="button" tabindex="0" aria-label="Open the photograph">
+  <img src="vaibhavi.JPG" alt="Vaibhavi Agarwal pointing at the Euclid Ave street sign in Toronto">
+  <figcaption>Euclid Ave · Toronto</figcaption>
+</figure>
+
+<section id="intro">
+  <p class="pitch">I build things that lower the door.</p>
+  <p class="line">Honours Math (Co-op) at Waterloo. Right now a research assistant at
+    <em>TUHH Hamburg</em>, wrapping a Python-only research library in something you can
+    actually click.</p>
+  <p class="creds">
+    <span>IBM GenAI runner-up</span>
+    <span>President's Scholarship of Distinction</span>
+    <span>Women in Math DRP — computational origami</span>
+  </p>
+  <p class="hint" id="hint">drag the windmill upward to fold it</p>
+</section>
+
+<section id="paper" aria-hidden="true">
+  <article class="leaf">
+    <button class="close" id="paper-close" aria-label="Fold back">fold back ↩</button>
+    <p class="kicker" id="paper-kicker"></p>
+    <h2 id="paper-title"></h2>
+    <div id="paper-body"></div>
+  </article>
+</section>
+
+<footer class="chrome bottom">
+  <div class="aschi">
+    <span>আসছি · aa rahi hoon</span>
+    no word for goodbye — you say "i'm coming back"
+  </div>
+  <div class="meta">
+    <button id="sound" aria-pressed="true" title="paper sound">sound on</button>
+    <span id="state">windmill</span> · <span id="foldpct">0% folded</span>
+    <span class="thm">M − V = ±2</span>
+  </div>
+</footer>
+
+<div class="deck-overlay" id="deck-overlay" hidden>
+  <div class="deck-stage" role="dialog" aria-modal="true" aria-labelledby="deck-title">
+    <p class="deck-title" id="deck-title"></p>
+    <div class="deck" id="deck"></div>
+    <div class="deck-bar">
+      <button class="deck-nav" id="deck-prev" aria-label="Previous photo">‹</button>
+      <span class="deck-count" id="deck-count"></span>
+      <button class="deck-nav" id="deck-next" aria-label="Next photo">›</button>
+    </div>
+    <p class="deck-hint">click the card to shuffle · esc to fold</p>
+  </div>
+</div>
+
+<script src="fold.js"></script>
+</body>
+</html>

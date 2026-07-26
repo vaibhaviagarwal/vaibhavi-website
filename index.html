@@ -468,8 +468,8 @@ function openDeck(title, photos) {
   deckEl.innerHTML = empty
     ? '<figure class="pcard pcard-empty" data-off="0"><p>No photos to display at the moment.</p></figure>'
     : deckPhotos.map(([src, cap]) =>
-        '<figure class="pcard"><img src="' + esc(src) + '" alt="' + esc(cap) + '">' +
-        '<figcaption>' + esc(cap) + '</figcaption></figure>'
+        '<figure class="pcard"><img src="' + esc(src) + '" alt="' + esc(cap || title) + '">' +
+        (cap ? '<figcaption>' + esc(cap) + '</figcaption>' : '') + '</figure>'
       ).join('');
 
   if (!empty) {

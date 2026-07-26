@@ -823,6 +823,9 @@ body.locked { overflow: hidden; }
   display: block;
 }
 
+/* a photo with no caption gets an even paper border all the way round */
+.pcard:not(:has(figcaption)) { padding: 11px; }
+
 .pcard figcaption {
   font-family: var(--mono);
   font-size: 0.6rem;
