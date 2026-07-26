@@ -225,12 +225,13 @@ body[data-phase="2"] .leaf{transform:rotate(-.5deg) scaleY(1);opacity:1}
 .deck-overlay[hidden]{display:none}
 .deck-stage{display:flex;flex-direction:column;align-items:center;gap:1rem;max-width:100%}
 .deck-title{font-family:var(--serif);font-size:1.6rem;margin:0;color:var(--cream)}
-.deck{position:relative;width:min(340px,80vw);height:min(440px,64vh)}
-.pcard{position:absolute;inset:0;margin:0;background:#fff;border-radius:3px;padding:12px;
+.deck{position:relative;width:min(340px,80vw);height:min(440px,64vh);z-index:1}
+.pcard{position:absolute;inset:0;margin:0;background:#efe9dc;border-radius:3px;padding:12px;
   display:flex;flex-direction:column;cursor:pointer;box-shadow:0 20px 44px rgba(0,0,0,.6);
   transform-origin:50% 120%;
   transition:transform .45s cubic-bezier(.22,.61,.36,1),opacity .45s ease}
-.pcard img{width:100%;flex:1 1 auto;min-height:0;object-fit:cover;border-radius:1px;display:block}
+.pcard img{width:100%;flex:1 1 auto;min-height:0;object-fit:cover;border-radius:1px;display:block;
+  background:#e3dccd}
 .pcard figcaption{font-family:var(--mono);font-size:.56rem;line-height:1.5;color:#5a5346;padding-top:.6rem}
 .pcard[data-off="0"]{transform:none;opacity:1}
 .pcard[data-off="1"]{transform:translateY(10px) scale(.965) rotate(2.4deg)}
@@ -239,13 +240,14 @@ body[data-phase="2"] .leaf{transform:rotate(-.5deg) scaleY(1);opacity:1}
 .pcard[data-off="4"]{transform:translateY(38px) scale(.87);opacity:0}
 .pcard-empty{cursor:default;align-items:center;justify-content:center;padding:2rem;background:#fffdf6}
 .pcard-empty p{font-family:var(--mono);font-size:.68rem;line-height:1.8;color:#8b8170;text-align:center;margin:0}
-.deck-bar{display:flex;align-items:center;gap:1.2rem}
+.deck-bar{display:flex;align-items:center;gap:1.2rem;position:relative;z-index:3}
 .deck-bar[hidden]{display:none}
 .deck-nav{border:1px solid var(--line-2);border-radius:50%;width:32px;height:32px;
   color:var(--cream-2);cursor:pointer}
 .deck-nav:hover{color:var(--teal);border-color:var(--teal)}
 .deck-count{font-family:var(--mono);font-size:.62rem;color:var(--muted);min-width:3.6rem;text-align:center}
-.deck-hint{font-family:var(--mono);font-size:.56rem;letter-spacing:.08em;color:var(--muted);margin:0}
+.deck-hint{font-family:var(--mono);font-size:.56rem;letter-spacing:.08em;color:var(--muted);
+  margin:0;position:relative;z-index:3}
 
 /* ---------------- responsive ---------------- */
 
@@ -270,32 +272,41 @@ body[data-phase="2"] .leaf{transform:rotate(-.5deg) scaleY(1);opacity:1}
 }
 
 /* ---- one column ---- */
+@media (pointer:coarse){
+  /* the flower is most of a phone screen — swiping it must scroll the page */
+  #sheet{touch-action:pan-y}
+}
+
 @media (max-width:900px){
   html,body{height:auto;overflow-x:hidden;overflow-y:auto}
   .glow{position:fixed}
 
   .chrome{position:static;padding:20px 20px 0;flex-direction:column;
-    align-items:flex-start;gap:.9rem}
-  .chrome.bottom{padding:2rem 20px 2.2rem}
+    align-items:flex-start;gap:.9rem;text-align:left}
+  .meta,.meta *{text-align:left}
+  .stocks,.elsewhere{justify-content:flex-start}
+  #sound{margin-bottom:2px}
+  .thm{margin-top:2px}
+  .chrome.bottom{padding:1.2rem 20px 2rem;gap:1.2rem}
   .elsewhere{justify-content:flex-start;gap:14px}
   .meta{text-align:left}
   .id b{font-size:18px}
 
-  #stage{position:relative;inset:auto;height:auto;padding:1.5rem 0 .5rem;
+  #stage{position:relative;inset:auto;height:auto;padding:.5rem 0 0;
     transition:transform .6s cubic-bezier(.32,.02,.2,1)}
   #sheet{width:min(66vmin,340px);height:min(66vmin,340px);
     filter:drop-shadow(0 14px 26px rgba(0,0,0,.5))}
-  body[data-phase="2"] #stage{transform:scale(.72);margin:-2.5rem 0 -1.5rem}
+  body[data-phase="2"] #stage{transform:scale(.78);padding:.5rem 0 0}
 
   /* the intro is part of the flow, and steps aside once you're reading */
-  #intro{position:static;transform:none;width:auto;padding:0 20px 1.5rem}
+  #intro{position:static;transform:none;width:auto;padding:0 20px 1rem;margin-top:-.5rem}
   .print{position:static;width:118px;margin:0 auto 1.2rem;display:block}
   body[data-phase="0"] .print,body[data-phase="2"] .print{display:none}
   body[data-phase="2"] #intro{display:none}
   .pitch{font-size:1.35rem}
   .line{font-size:.85rem;max-width:none}
   .creds{gap:.35rem}
-  .hint{margin-top:1rem}
+  .hint{margin-top:1.2rem;line-height:1.8}
 
   /* the paper only occupies space when it's actually open */
   #paper{position:static;width:auto;padding:0 16px;display:none;opacity:1;
@@ -307,7 +318,7 @@ body[data-phase="2"] .leaf{transform:rotate(-.5deg) scaleY(1);opacity:1}
   .leaf::before{display:none}
   .leaf::after{width:24px;height:24px}
   .leaf h2{font-size:2rem;margin-bottom:1.1rem}
-  .close{position:sticky;top:0;float:right;margin:-.4rem -.4rem 0 0}
+  .close{position:static;display:block;margin:0 0 1.1rem auto;width:max-content}
 
   .log-head{margin-bottom:.8rem}
   .log .receipt{max-width:100%;transform:none}

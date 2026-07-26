@@ -259,9 +259,12 @@ const up   = () => { if (!dragging) return; dragging = false; sheet.classList.re
 sheet.addEventListener('mousedown', ev => { ev.preventDefault(); down(ev.clientY); });
 addEventListener('mousemove', ev => move(ev.clientY));
 addEventListener('mouseup', up);
-sheet.addEventListener('touchstart', ev => down(ev.touches[0].clientY), { passive:true });
-addEventListener('touchmove', ev => { if (dragging) move(ev.touches[0].clientY); }, { passive:true });
-addEventListener('touchend', up);
+const coarse = matchMedia('(pointer: coarse)').matches;
+if (!coarse) {
+  sheet.addEventListener('touchstart', ev => down(ev.touches[0].clientY), { passive:true });
+  addEventListener('touchmove', ev => { if (dragging) move(ev.touches[0].clientY); }, { passive:true });
+  addEventListener('touchend', up);
+}
 sheet.addEventListener('click', () => {
   if (Math.abs(t - dragT) < .02 && phase !== 2) { target = target === 1 ? 0 : 1; Paper.crease(); }
 });
@@ -485,8 +488,9 @@ function openDeck(title, photos) {
                                : 'click the card to shuffle · esc to fold';
   if (empty) emptyCard();
   else {
-    deckEl.innerHTML = deckPhotos.map(([src, cap]) =>
-      `<figure class="pcard"><img src="${esc(src)}" alt="${esc(cap || title)}">` +
+    deckEl.innerHTML = deckPhotos.map(([src, cap], i) =>
+      `<figure class="pcard"><img src="${esc(src)}" alt="${esc(cap || title)}"` +
+      (i > 2 ? ' loading="lazy"' : '') + `>` +
       (cap ? `<figcaption>${esc(cap)}</figcaption>` : '') + `</figure>`).join('');
     [...deckEl.children].forEach(c => {
       c.addEventListener('click', () => step(1));
