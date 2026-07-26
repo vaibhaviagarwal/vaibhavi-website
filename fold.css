@@ -52,6 +52,9 @@ body[data-phase="1"] #home,body[data-phase="2"] #home{opacity:.9}
 #sound:hover{color:var(--teal);border-bottom-color:var(--teal)}
 #sound[aria-pressed="false"]{opacity:.45}
 .thm{display:block;opacity:.75;margin-top:5px}
+a.prev{color:var(--muted);text-decoration:none;border-bottom:1px dashed var(--line-2);
+  opacity:.6;margin-top:6px;display:inline-block}
+a.prev:hover{color:var(--teal);border-bottom-style:solid;border-color:var(--teal);opacity:1}
 
 /* ---------------- the sheet ---------------- */
 #stage{position:fixed;inset:0;z-index:2;display:grid;place-items:center;
