@@ -100,6 +100,9 @@ body[data-phase="0"] .print,body[data-phase="2"] .print{opacity:0;pointer-events
 .hint{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;
   color:var(--muted);margin:1.1rem 0 0;transition:opacity .4s ease}
 
+/* ---------------- the fold list (phones) ---------------- */
+#folds{display:none}
+
 /* ---------------- the paper ---------------- */
 #paper{position:fixed;top:0;right:max(0px,calc((100vw - 1640px)/2));bottom:0;
   width:min(58vw,720px);z-index:9;
@@ -300,13 +303,14 @@ body[data-phase="2"] .leaf{transform:rotate(-.5deg) scaleY(1);opacity:1}
 
   /* the intro is part of the flow, and steps aside once you're reading */
   #intro{position:static;transform:none;width:auto;padding:0 20px 1rem;margin-top:-.5rem}
-  .print{position:static;width:118px;margin:0 auto 1.2rem;display:block}
+  .print{position:static;width:112px;margin:1.6rem auto .5rem;display:block}
   body[data-phase="0"] .print,body[data-phase="2"] .print{display:none}
   body[data-phase="2"] #intro{display:none}
   .pitch{font-size:1.35rem}
   .line{font-size:.85rem;max-width:none}
   .creds{gap:.35rem}
   .hint{margin-top:1.2rem;line-height:1.8}
+  body[data-phase="1"] .hint,body[data-phase="2"] .hint{display:none}
 
   /* the paper only occupies space when it's actually open */
   #paper{position:static;width:auto;padding:0 16px;display:none;opacity:1;
@@ -329,9 +333,21 @@ body[data-phase="2"] .leaf{transform:rotate(-.5deg) scaleY(1);opacity:1}
   .deck{width:min(300px,78vw);height:min(400px,58vh)}
   .deck-title{font-size:1.35rem}
 
-  /* SVG text scales with the drawing, so it needs bumping when the sheet shrinks */
-  .pl{font-size:20px}
-  .ps{font-size:8.5px}
+  /* the radial labels collide on a narrow screen — use a list instead */
+  .pl,.ps{display:none}
+
+  #folds{display:block;padding:0 20px;margin:.5rem 0 0;
+    opacity:0;max-height:0;overflow:hidden;transition:opacity .4s ease}
+  body[data-phase="1"] #folds,body[data-phase="2"] #folds{opacity:1;max-height:none}
+  #folds button{display:flex;width:100%;align-items:baseline;justify-content:space-between;
+    gap:1rem;padding:.85rem .2rem;border-top:1px dashed var(--line-2);cursor:pointer;
+    text-align:left;color:var(--cream)}
+  #folds button:first-child{border-top:0}
+  #folds button:last-child{border-bottom:1px dashed var(--line-2)}
+  #folds button:active{background:rgba(93,202,165,.07)}
+  .fname{font-family:var(--serif);font-size:1.45rem;line-height:1}
+  .fsub{font-family:var(--mono);font-size:.55rem;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--muted)}
 }
 
 /* small phones */

@@ -289,6 +289,15 @@ function loop() {
 }
 if (reduced) { t = 1; target = 1; setPhase(1); render(); } else loop();
 
+/* On a phone the six labels can't ring the flower without colliding, so the
+   same six become a plain list underneath it once the lotus is open. */
+const foldsNav = $('#folds');
+foldsNav.innerHTML = FACES.map((f,i) =>
+  `<button data-face="${f}"><span class="fname">${f}</span><span class="fsub">${SUBS[i]}</span></button>`
+).join('');
+$$('#folds button').forEach(b =>
+  b.addEventListener('click', () => openFace(b.dataset.face)));
+
 /* the print sits under the lotus, and opens in the spotlight when clicked */
 const printEl = $('#print');
 const openPrint = () => openDeck('Euclid Ave · Toronto',
