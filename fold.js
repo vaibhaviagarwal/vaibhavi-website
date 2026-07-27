@@ -283,7 +283,7 @@ $('#home').addEventListener('click', () => {
 
 function loop() {
   if (!dragging) {
-    t += (target - t) * .07;
+    t += (target - t) * (narrow() ? .035 : .07);
     if (Math.abs(target - t) < .001) t = target;
   }
   if (phase === 0 && t > .9) setPhase(1);
@@ -305,8 +305,16 @@ foldsNav.innerHTML = FACES.map((f,i) =>
 $$('#folds button').forEach(b =>
   b.addEventListener('click', () => openFace(b.dataset.face)));
 
-/* phones start folded — the flower reads as a mark, not a puzzle */
-if (matchMedia('(max-width: 900px)').matches) { t = 1; target = 1; setPhase(1); }
+/* Phones: the windmill spins for a beat, then folds itself into the lotus and
+   stops. The visitor sees the whole idea without doing anything, and the page
+   is still afterwards rather than looping. Tap to send it back. */
+if (narrow()) {
+  const th = $('#taphint');
+  const label = () => { if (th) th.textContent = target === 1 ? 'tap to unfold' : 'tap to fold'; };
+  if (!reduced) setTimeout(() => { target = 1; Paper.crease(); label(); }, 1100);
+  sheet.addEventListener('click', () => setTimeout(label, 10));
+  label();
+}
 
 /* the print sits under the lotus, and opens in the spotlight when clicked */
 const printEl = $('#print');
