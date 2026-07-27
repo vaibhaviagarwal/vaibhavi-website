@@ -151,7 +151,7 @@ const dOf = v => `M0 0 C${v[0]} ${v[1]} ${v[2]} ${v[3]} ${v[4]} ${v[5]}` +
 const lerp  = (a,b,t) => a.map((x,i) => x + (b[i]-x)*t);
 const ease  = x => x < .5 ? 4*x*x*x : 1 - Math.pow(-2*x+2,3)/2;
 
-const model = $('#model'), innerG = $('#inner'), labels = $('#labels'), creases = $('#creases');
+const model = $('#model'), innerG = $('#inner'), labels = $('#labels');
 const core = $('#core'), intro = $('#intro');
 const outer = [], inner = [], texts = [];
 
@@ -176,7 +176,9 @@ for (let i = 0; i < N; i++) {
   texts.push({ t, s });
 }
 
+
 /* crease pattern behind the model — mountains solid, valleys dashed */
+const creases = $('#creases');
 for (let i = 0; i < N; i++) {
   const a = (i/N)*Math.PI*2 - Math.PI/2;
   creases.appendChild(el('line', { x1:0, y1:0, x2:Math.cos(a)*152, y2:Math.sin(a)*152,
@@ -225,15 +227,20 @@ function render() {
   }
   core.setAttribute('r', (e*11).toFixed(1));
   core.setAttribute('opacity', e.toFixed(2));
-  creases.setAttribute('opacity', (t*.85).toFixed(2));
 
+  creases.setAttribute('opacity', (t*.85).toFixed(2));
   const on = t > .74 && phase !== 2;
   texts.forEach(o => { o.t.classList.toggle('on', on); o.s.classList.toggle('on', on); });
   $('#foldpct').textContent = Math.round(t*100) + '% folded';
   $('#state').textContent = phase === 2 ? 'reading' : t < .15 ? 'windmill' : t > .85 ? 'lotus' : 'folding';
-  const introOut = Math.max(0, 1 - t * 3.2);
-  intro.style.opacity = phase === 2 ? 0 : introOut.toFixed(2);
-  intro.style.pointerEvents = introOut > .1 ? 'auto' : 'none';
+  if (narrow()) {
+    intro.style.opacity = 1;
+    intro.style.pointerEvents = 'auto';
+  } else {
+    const introOut = Math.max(0, 1 - t * 3.2);
+    intro.style.opacity = phase === 2 ? 0 : introOut.toFixed(2);
+    intro.style.pointerEvents = introOut > .1 ? 'auto' : 'none';
+  }
 }
 
 function setPhase(p) {
@@ -297,6 +304,9 @@ foldsNav.innerHTML = FACES.map((f,i) =>
 ).join('');
 $$('#folds button').forEach(b =>
   b.addEventListener('click', () => openFace(b.dataset.face)));
+
+/* phones start folded — the flower reads as a mark, not a puzzle */
+if (matchMedia('(max-width: 900px)').matches) { t = 1; target = 1; setPhase(1); }
 
 /* the print sits under the lotus, and opens in the spotlight when clicked */
 const printEl = $('#print');

@@ -51,10 +51,6 @@ body[data-phase="1"] #home,body[data-phase="2"] #home{opacity:.9}
   border-bottom:1px dashed var(--line-2);padding-bottom:2px}
 #sound:hover{color:var(--teal);border-bottom-color:var(--teal)}
 #sound[aria-pressed="false"]{opacity:.45}
-.thm{display:block;opacity:.75;margin-top:5px}
-a.prev{color:var(--muted);text-decoration:none;border-bottom:1px dashed var(--line-2);
-  opacity:.6;margin-top:6px;display:inline-block}
-a.prev:hover{color:var(--teal);border-bottom-style:solid;border-color:var(--teal);opacity:1}
 
 /* ---------------- the sheet ---------------- */
 #stage{position:fixed;inset:0;z-index:2;display:grid;place-items:center;
@@ -71,7 +67,7 @@ body[data-phase="2"] #stage{transform:translateX(max(-27vw,-380px)) scale(.52)}
 .pl:hover{fill:var(--teal)}
 .ps{font-family:var(--mono);font-size:6px;letter-spacing:.16em;fill:var(--muted);
   opacity:0;transition:opacity .55s ease;dominant-baseline:middle;cursor:pointer}
-.ps.on{opacity:.85}
+.ps.on{opacity:.8}
 body[data-phase="2"] .pl,body[data-phase="2"] .ps{opacity:0;pointer-events:none}
 #intro{position:fixed;left:50%;bottom:9vh;transform:translateX(-50%);z-index:6;
   width:min(660px,84vw);text-align:center;transition:opacity .35s ease}
@@ -82,9 +78,13 @@ body[data-phase="2"] .pl,body[data-phase="2"] .ps{opacity:0;pointer-events:none}
   box-shadow:0 16px 30px rgba(0,0,0,.55),0 2px 5px rgba(0,0,0,.4);
   transition:transform .45s cubic-bezier(.2,.8,.3,1),opacity .4s ease}
 .print:hover{transform:rotate(-1deg) translateY(-5px)}
-/* stays out of sight until the windmill has opened into the lotus */
-body[data-phase="0"] .print,body[data-phase="2"] .print{opacity:0;pointer-events:none;
+/* stays out of sight until the windmill has opened into the lotus.
+   it lives inside #stage (for the phone layout), and #stage is transformed
+   while a section is open — so it's removed outright there rather than just
+   faded, since a transformed ancestor breaks position:fixed. */
+body[data-phase="0"] .print{opacity:0;pointer-events:none;
   transform:rotate(-3.2deg) translateY(14px)}
+body[data-phase="2"] .print{display:none}
 .print{cursor:pointer}
 .print:focus-visible{outline:2px solid var(--teal);outline-offset:4px}
 .print img{width:100%;aspect-ratio:3/4;object-fit:cover;display:block;border-radius:1px}
@@ -281,44 +281,65 @@ body[data-phase="2"] .leaf{transform:rotate(-.5deg) scaleY(1);opacity:1}
 }
 
 @media (max-width:900px){
+  /* ------------------------------------------------------------------
+     Phones get a plain scrolling page: the flower becomes a small mark
+     beside the name, and the six sections are a list you can read at a
+     glance. Desktop is untouched.
+     ------------------------------------------------------------------ */
   html,body{height:auto;overflow-x:hidden;overflow-y:auto}
-  .glow{position:fixed}
+  .glow{position:fixed;background:radial-gradient(70% 40% at 50% 12%,rgba(93,202,165,.10),transparent 70%)}
 
-  .chrome{position:static;padding:20px 20px 0;flex-direction:column;
-    align-items:flex-start;gap:.9rem;text-align:left}
+  /* everything the desktop layout uses as decoration or status */
+  .creds,#state,#foldpct,.hint,.pl,.ps,#home{display:none}
+
+  /* one column, but never wider than a comfortable measure */
+  .chrome,#stage,#intro,#folds,.print,#paper{max-width:560px;margin-left:auto;margin-right:auto}
+
+  .chrome{position:static;padding:26px 22px 0;flex-direction:column;
+    align-items:flex-start;gap:1.4rem;text-align:left;width:100%}
+  /* .chrome.bottom beats plain .chrome on specificity, so it needs saying twice */
+  .chrome.bottom{padding:2.2rem 22px 2.4rem;gap:1rem;align-items:flex-start;
+    bottom:auto;text-align:left}
+  .chrome.bottom .meta{text-align:left}
+  .id{gap:0}
+  .id b{font-size:22px}
+  .elsewhere{justify-content:flex-start;gap:18px}
   .meta,.meta *{text-align:left}
-  .stocks,.elsewhere{justify-content:flex-start}
-  #sound{margin-bottom:2px}
-  .thm{margin-top:2px}
-  .chrome.bottom{padding:1.2rem 20px 2rem;gap:1.2rem}
-  .elsewhere{justify-content:flex-start;gap:14px}
-  .meta{text-align:left}
-  .id b{font-size:18px}
+  #sound{margin:0}
 
-  #stage{position:relative;inset:auto;height:auto;padding:.5rem 0 0;
-    transition:transform .6s cubic-bezier(.32,.02,.2,1)}
-  #sheet{width:min(66vmin,340px);height:min(66vmin,340px);
-    filter:drop-shadow(0 14px 26px rgba(0,0,0,.5))}
-  body[data-phase="2"] #stage{transform:scale(.78);padding:.5rem 0 0}
+  /* flower left, photograph right, pitch underneath — the stage reserves
+     enough height for the taller of the two so nothing collides */
+  #stage{position:relative;inset:auto;height:auto;min-height:190px;
+    padding:1.6rem 22px .2rem;place-items:start;transition:none;width:100%}
+  body[data-phase="2"] #stage{transform:none}
+  #sheet{width:104px;height:104px;filter:drop-shadow(0 8px 16px rgba(0,0,0,.5))}
 
-  /* the intro is part of the flow, and steps aside once you're reading */
-  #intro{position:static;transform:none;width:auto;padding:0 20px 1rem;margin-top:-.5rem}
-  .print{position:static;width:112px;margin:1.6rem auto .5rem;display:block}
-  body[data-phase="0"] .print,body[data-phase="2"] .print{display:none}
-  body[data-phase="2"] #intro{display:none}
-  .pitch{font-size:1.35rem}
-  .line{font-size:.85rem;max-width:none}
-  .creds{gap:.35rem}
-  .hint{margin-top:1.2rem;line-height:1.8}
-  body[data-phase="1"] .hint,body[data-phase="2"] .hint{display:none}
+  #intro{position:static;transform:none;width:auto;text-align:left;padding:0 22px}
+  .pitch{font-size:1.6rem}
+  .line{font-size:.92rem;line-height:1.65;margin:.8rem 0 0;max-width:none}
 
-  /* the paper only occupies space when it's actually open */
-  #paper{position:static;width:auto;padding:0 16px;display:none;opacity:1;
-    transition:none}
+  /* the six sections, always visible */
+  #folds{display:block;padding:0 22px;margin:1.6rem auto 0;width:100%}
+  #folds button{display:flex;width:100%;align-items:baseline;justify-content:space-between;
+    gap:1rem;padding:1rem .1rem;border-top:1px dashed var(--line-2);cursor:pointer;
+    text-align:left;color:var(--cream)}
+  #folds button:last-child{border-bottom:1px dashed var(--line-2)}
+  #folds button:active{background:rgba(93,202,165,.07)}
+  .fname{font-family:var(--serif);font-size:1.5rem;line-height:1}
+  .fsub{font-family:var(--mono);font-size:.55rem;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--muted)}
+
+  /* pinned to the top right of the stage, beside the flower */
+  .print{position:absolute;top:1.3rem;right:22px;left:auto;bottom:auto;
+    width:112px;margin:0;display:block;opacity:1;transform:rotate(3deg);z-index:4}
+  body[data-phase="0"] .print,body[data-phase="2"] .print{opacity:1;transform:rotate(3deg)}
+  .print:active{transform:rotate(1deg) scale(.98)}
+  body[data-phase="0"] .print,body[data-phase="2"] .print{opacity:1;transform:rotate(-3.2deg)}
+
+  #paper{position:static;width:auto;padding:1.6rem 16px 0;display:none;opacity:1;transition:none}
   body[data-phase="2"] #paper{display:block;pointer-events:auto}
   .leaf,body[data-phase="2"] .leaf{transform:none;max-height:none;overflow:visible;
-    padding:1.9rem 1.4rem 1.6rem;border-radius:3px;
-    box-shadow:0 16px 34px rgba(0,0,0,.45)}
+    padding:1.9rem 1.4rem 1.6rem;border-radius:3px;box-shadow:0 16px 34px rgba(0,0,0,.45)}
   .leaf::before{display:none}
   .leaf::after{width:24px;height:24px}
   .leaf h2{font-size:2rem;margin-bottom:1.1rem}
@@ -328,26 +349,8 @@ body[data-phase="2"] .leaf{transform:rotate(-.5deg) scaleY(1);opacity:1}
   .log .receipt{max-width:100%;transform:none}
   .item p.b,.item ul li,.lede{max-width:none}
   .artgrid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:.9rem}
-  .item video{margin-top:.7rem}
-
   .deck{width:min(300px,78vw);height:min(400px,58vh)}
   .deck-title{font-size:1.35rem}
-
-  /* the radial labels collide on a narrow screen — use a list instead */
-  .pl,.ps{display:none}
-
-  #folds{display:block;padding:0 20px;margin:.5rem 0 0;
-    opacity:0;max-height:0;overflow:hidden;transition:opacity .4s ease}
-  body[data-phase="1"] #folds,body[data-phase="2"] #folds{opacity:1;max-height:none}
-  #folds button{display:flex;width:100%;align-items:baseline;justify-content:space-between;
-    gap:1rem;padding:.85rem .2rem;border-top:1px dashed var(--line-2);cursor:pointer;
-    text-align:left;color:var(--cream)}
-  #folds button:first-child{border-top:0}
-  #folds button:last-child{border-bottom:1px dashed var(--line-2)}
-  #folds button:active{background:rgba(93,202,165,.07)}
-  .fname{font-family:var(--serif);font-size:1.45rem;line-height:1}
-  .fsub{font-family:var(--mono);font-size:.55rem;letter-spacing:.16em;
-    text-transform:uppercase;color:var(--muted)}
 }
 
 /* small phones */
@@ -357,7 +360,6 @@ body[data-phase="2"] .leaf{transform:rotate(-.5deg) scaleY(1);opacity:1}
   .print{width:102px}
   .leaf{padding:1.6rem 1.15rem 1.4rem}
   .leaf h2{font-size:1.75rem}
-  .creds span{font-size:.52rem;padding:.24rem .5rem}
   .pl{font-size:22px}
   .ps{font-size:9.5px}
   .trips li{gap:.6rem;font-size:.84rem}
